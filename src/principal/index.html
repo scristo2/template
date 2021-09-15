@@ -1,0 +1,78 @@
+<div class="App">
+    <header class="App-header">
+        <div class="App-logo"></div>
+    </header>
+    <div class="App-content notranslate">this is the content</div>
+    <footer class="App-footer">
+        <input type="button" class="App-input-file-general" value="&#128194;">
+        <input class="App-input-emoji" type="button" value="&#128512;"><textarea name=""  class="App-input-general" placeholder="Tell us something ...."></textarea>
+        <input value="&#128233;" type="button"  class="App-submit-general"></footer>
+    <script type="text/javascript">
+       
+       var main = function main(){
+              
+
+             function clickImageLogo(){
+                
+                  $('.App-logo').on('click', function(){window.location.reload()});
+
+                  
+                 
+             }
+
+
+
+             function autoGrowGenearlChat(){
+
+                 var index = 1;
+
+
+                 $('.App-input-general').on('keyup', function(e){
+                      
+
+                      var inputGeneral = document.querySelector('.App-input-general');
+                      var getScrollInputGeneral = function(){
+                          return inputGeneral.scrollHeight > inputGeneral.clientHeight;
+                      }
+
+                      var saltLines=  getScrollInputGeneral() || inputGeneral.value.split('\n').length ;
+                      
+                     
+                      
+                      
+                      var newHeightInputGeneral = 'calc(' + (saltLines * 16) + 'px + 2vmin)';
+
+                      $('.App-input-general').css({
+
+                          height : newHeightInputGeneral
+                      });
+                      
+                      
+                      
+                 });
+             }
+
+
+
+             return{
+
+                 clickImageLogo,
+                 autoGrowGenearlChat
+             }
+       }
+
+
+
+       main().clickImageLogo();
+       main().autoGrowGenearlChat();
+         
+
+       for (let index = 0; index < 100; index++) {
+           
+              $('.App-content').append("<p>" + index + "</p>");
+       }
+
+       
+       
+    </script>
+</div>

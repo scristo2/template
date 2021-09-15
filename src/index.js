@@ -1,22 +1,19 @@
-import {App} from "./App.js";
-
-function insertStyle(){
-
-    const headIndex = document.getElementsByTagName('head')[0];
-
-    const styleIndex = document.createElement('link');
-
-    styleIndex.rel = 'stylesheet';
-
-    styleIndex.href = 'template/src/index.css'; //change url
-    styleIndex.type = 'text/css';
-
-    headIndex.appendChild(styleIndex);
-}
-
+import {App} from "../src/App.js?34";
 
 $(document).ready(function(){
      
-     insertStyle();
-     const app  = new App();
+      const headIndex = document.querySelectorAll('head')[0];
+
+      const styleIndex = document.createElement('link');
+
+      styleIndex.href = './src/index.css?=7';
+
+      styleIndex.rel = 'stylesheet';
+
+      styleIndex.type = 'text/css';
+
+      headIndex.appendChild(styleIndex);
+      
+      App().main();
+      
 });

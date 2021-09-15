@@ -1,0 +1,14 @@
+{
+
+    "principal" : {
+
+        "first" : "this is the first",
+        "second" : "this is the second",
+        "third" : [{
+
+            "test" : "esto es un test",
+            "cua" : "es un pato"
+        }, {
+            "persona" : "soy un apersona"}]
+    }
+}

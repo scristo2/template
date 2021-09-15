@@ -2,3 +2,10 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f 
 RewriteRule ^(.*)$ $1.php
+
+#dont show directories
+<IfModule mod_rewrite.c>
+  <IfModule mod_negotiation.c>
+     Options -Multiviews -Indexes
+     </IfModule>
+</IfModule>  

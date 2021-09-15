@@ -1,34 +1,80 @@
-export class App{
+
+export var App = function(){
+
+    //principal, login, register, activity
 
 
-    constructor(){
+     function getCodeFromPage(url, div){
 
-        this.createStyle();
-        this.createApp();
-    }
+         
+          fetch(url)
+
+          .then(response => {
+
+              if(!response.ok){
+
+                 throw('An ocurred an error');
+              
+              }else{
+
+                 return response.text();
+              }
+
+          }).then(text => $(div).append(text))
+
+          .catch(function(e){console.log(e)});
 
 
-    createStyle(){
+       
+     }//end function getCodeFromPage
+
+     
+
+     function addStyle(){
+
+          const head = document.querySelectorAll('head')[0];
+
+          const style = document.createElement('link');
+
+          style.rel = 'stylesheet';
+
+          style.href = './src/App.css';
+
+          style.type = 'text/css';
+
+          head.appendChild(style);
+     }
 
 
-        const head = document.getElementsByTagName('head')[0];
+
+     function pagePrincipal(){
+
         
-        const style = document.createElement('link');
+        
+          getCodeFromPage("./src/principal/index.html?1", '#root');
 
-        style.rel = 'stylesheet';
-
-        style.href = 'template/src/App.css'; //change url
-
-        style.type = 'text/css';
-
-        head.appendChild(style);
+    
+        
     }
 
 
-    createApp(){
 
-        $('#root').append("<div class='App'></div>");
+     function main(){
 
-        $('.App').append("<header class='App-header'></header>");
-    }
+          //add style
+          addStyle();
+
+          //add principal page
+
+          pagePrincipal();
+     }
+     
+
+
+
+     return {
+
+         getCodeFromPage,
+         main
+     }
 }
