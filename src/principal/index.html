@@ -1,11 +1,20 @@
 <div class="App">
     <header class="App-header">
-        <div class="App-logo"></div>
+        <div class="App-header-elements">
+            <div class="App-header-buttonMenu">
+                <div class="img-ButtonMenu"></div>
+            </div>
+            <div class="App-logo"></div>
+            <div class="App-login">
+                <div class="blockedImg"></div>
+                <div class="loginUsername"><p class="textUsername">Not logged</p></div>
+            </div>
+        </div>
         <div class="App-menu">
             <p class="menu menu-border">Principal</p>
             <p class="menu menu-border">Banned</p>
             <p class="menu menu-border">Teams</p>
-            <p class="menu">Runes</p>
+            <p class="menu" id="runes">Runes</p>
         </div>
     </header>
     <div class="App-content notranslate"></div>
@@ -29,7 +38,7 @@
 
 
 
-             function autoGrowGenearlChat(){
+             function autoGrowInputGeneralChat(){
 
 
                  $('.App-input-general').on('input', function(e){
@@ -48,48 +57,105 @@
              }
 
 
-             function loadChatConversation(){}   
+             function loadChatConversation(){
+
+                  let classChatDiv = null;
+
+
+                   for (let index = 0; index < 100; index++) {
+
+       
+                       if(index % 2 == 0){
+
+                            classChatDiv = 'App-content-dialogRight';
+
+                        }else{
+          
+                            classChatDiv = 'App-content-dialogLeft';
+                       
+                        }
+    
+                       $('.App-content').append("<div class='App-content-dialog " + classChatDiv + "'><div class='talkbubble'></div></div>");
+       
+                   }
+
+                   let resultTime = new Date().getHours() + ':' + new Date().getMinutes();
+
+                   let finalResultTime = resultTime;
+
+                   $('.talkbubble').append("<div class='talkbubble-text'></div><div class='talkbubble-hour'><p>" + finalResultTime + "</p></div>");
+            
+                   
+            }
+            
+            
+            
+            
+            function clickMenuButton(){
+
+                var indexClickMenuButton = 0;
+
+                $('.img-ButtonMenu').on('click', function(){
+
+
+                      if(indexClickMenuButton == 0){
+
+                          fetch('/src/menu/index.html')
+
+                          .then(response => {
+
+                              if(!response.ok){
+
+                                  throw('An ocurred an problem load menu');
+
+                              }else{
+
+                                  return response.text();
+                              }
+                          }).then(text => $('.App-content').append(text))
+
+                          .catch(function(e){
+                              
+                              console.log(e)
+                          });
+
+                          indexClickMenuButton = 1;
+
+
+                      }else{
+
+                          $('.App-MenuDiv').remove();
+
+                          indexClickMenuButton = 0;
+                      }
+
+
+                      console.log(indexClickMenuButton);
+
+
+                });
+            }
+
+
 
 
 
              return{
 
                  clickImageLogo,
-                 autoGrowGenearlChat,
-                 loadChatConversation
+                 autoGrowInputGeneralChat,
+                 loadChatConversation,
+                 clickMenuButton
              }
        }
 
 
 
        main().clickImageLogo();
-       main().autoGrowGenearlChat();
+       main().autoGrowInputGeneralChat();
+       main().loadChatConversation();
+       main().clickMenuButton();
 
-       let classChatDiv = null;
-
-         
-
-       for (let index = 0; index < 100; index++) {
-
-              
-              if(index % 2 == 0){
-
-                  classChatDiv = 'App-content-dialogRight';
-
-              }else{
-                 
-                  classChatDiv = 'App-content-dialogLeft';
-              }
-           
-              $('.App-content').append("<div class='App-content-dialog " + classChatDiv + "'><div class='talkbubble'></div></div>");
-              
-       }
-
-       let resultTime = new Date().getHours() + ':' + new Date().getMinutes();
-
-       let finalResultTime = resultTime;
-
-       $('.talkbubble').append("<div class='talkbubble-text'></div><div class='talkbubble-hour'><p>" + finalResultTime + "</p></div>");
        
     </script>
-</div>3
+</div>
