@@ -27,6 +27,7 @@
       justify-content: center;
       align-items: center;
       order: 1;
+      flex-direction: column;
 }
 
 
@@ -34,16 +35,49 @@
      width: 30vmin;
      height: 15vmin;
      cursor: pointer;
-     -webkit-mask-image: url(/src/images/leagueOfLegends.svg);
-     mask-image: url(/src/images/leagueOfLegends.svg);
+     -webkit-mask-image: url(/template/src/images/leagueOfLegends.svg);
+     mask-image: url(/template/src/images/leagueOfLegends.svg);
      -webkit-mask-size: 100% 100%;
      mask-size: 100% 100%;
      background: #D3CCE3;  /* fallback for old browsers */
      background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
      background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
      
+}
 
 
+.App-menu{
+
+     background-color: #37707e;
+     margin-bottom: 1vmin;
+     display: flex;
+     flex-flow: row wrap;
+     width: 100%;    
+     
+}
+
+.menu{
+
+     flex: 1;
+     color: rgba(138, 217, 228, 0.397);
+     text-align: center;
+     margin-right: 1vmin;
+     margin-left: 1vmin;
+     font-size: calc(10px + 2vmin);
+     cursor: pointer;
+     font-family: cursive;
+}
+
+
+.menu-border{
+
+     border-right: 1px solid snow;
+}
+
+
+.menu:hover{
+
+     color: red;
 }
 
      
@@ -53,7 +87,69 @@
      height: 100%;
      overflow-y: scroll;
      order: 3;
+     display: flex;
+     flex-direction: column;
 }
+
+.App-content-dialog{
+
+     display: flex;
+     flex-flow: row wrap;
+     padding: 4vmin;
+     margin-left: 12.5%;
+}
+
+.App-content-dialogLeft{
+
+     flex-flow: row-reverse;
+     margin-left: 0;
+     margin-right: 12.5%;
+}
+
+.talkbubble {
+     min-width: 30%;
+     max-width: 60%;
+     min-height: 60px;
+     background: rgb(148, 197, 236);
+     position: relative;
+     -moz-border-radius: 10px;
+     -webkit-border-radius: 10px;
+     border-radius: 10px;
+     color: white;
+     display: flex;
+     flex-direction: column;
+   }
+   .talkbubble:before {
+     content: "";
+     position: absolute;
+     right: 100%;
+     top: 26px;
+     width: 0;
+     height: 0;
+     border-top: 13px solid transparent;
+     border-right: 13px solid rgb(148, 197, 236);
+     border-bottom: 13px solid transparent;
+   }
+
+
+   .talkbubble-text{
+
+     word-wrap: break-word;
+     line-height: 20px;
+     height: 100%;
+     padding: 1vmin;
+        
+   }
+
+   .talkbubble-hour{
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        color: green;
+        margin-right: 1vmin;
+        
+   }
      
      
 .App-footer{
@@ -65,6 +161,7 @@
      flex-wrap: wrap;
      justify-content: center;
      align-items: center;
+     margin-bottom: 2vmin;
          
 }
 
@@ -79,10 +176,19 @@
 .App-input-general{
 
      resize: none;
-     height: calc(16px + 2vmin);
+     height: auto;
      flex: 1;
      font-size: 16px;
-    
+     white-space: 40px;
+     line-height: 20px;
+     outline: none !important;
+     outline-width: 0 !important;
+     box-shadow: none;
+     -moz-box-shadow:none;
+     -webkit-box-shadow:none;
+     border: none;
+     max-height: 100px;
+     max-width: 600px;
      
 }
 
@@ -90,7 +196,7 @@
 .App-input-emoji, .App-submit-general, .App-input-file-general{
 
     
-     font-size: calc(10px + 2vmin);
+     font-size: calc(16px + 2vmin);
      cursor: pointer;
      
 }
@@ -112,4 +218,17 @@
 
           order: 3;
      }
+
+
+     
+}
+
+
+@media screen and (min-width: 1000px) {
+
+     .talkbubble{
+
+          max-width: 33%;
+     }
+     
 }

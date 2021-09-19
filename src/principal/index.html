@@ -1,13 +1,21 @@
 <div class="App">
     <header class="App-header">
         <div class="App-logo"></div>
+        <div class="App-menu">
+            <p class="menu menu-border">Principal</p>
+            <p class="menu menu-border">Banned</p>
+            <p class="menu menu-border">Teams</p>
+            <p class="menu">Runes</p>
+        </div>
     </header>
-    <div class="App-content notranslate">this is the content</div>
+    <div class="App-content notranslate"></div>
     <footer class="App-footer">
-        <input type="button" class="App-input-file-general" value="&#128194;">
+        <input type="button" style="color: blue;" class="App-input-file-general" value=📂>
         <input class="App-input-emoji" type="button" value="&#128512;"><textarea name=""  class="App-input-general" placeholder="Tell us something ...."></textarea>
-        <input value="&#128233;" type="button"  class="App-submit-general"></footer>
+        <input style="color: green;" value= ▶ type="button"  class="App-submit-general"></footer>
     <script type="text/javascript">
+
+       
        
        var main = function main(){
               
@@ -15,7 +23,6 @@
              function clickImageLogo(){
                 
                   $('.App-logo').on('click', function(){window.location.reload()});
-
                   
                  
              }
@@ -24,40 +31,32 @@
 
              function autoGrowGenearlChat(){
 
-                 var index = 1;
 
-
-                 $('.App-input-general').on('keyup', function(e){
+                 $('.App-input-general').on('input', function(e){
                       
 
-                      var inputGeneral = document.querySelector('.App-input-general');
-                      var getScrollInputGeneral = function(){
-                          return inputGeneral.scrollHeight > inputGeneral.clientHeight;
-                      }
-
-                      var saltLines=  getScrollInputGeneral() || inputGeneral.value.split('\n').length ;
-                      
+                     this.style.height = 'auto';
+                     this.style.height = this.scrollHeight + 'px';
                      
-                      
-                      
-                      var newHeightInputGeneral = 'calc(' + (saltLines * 16) + 'px + 2vmin)';
-
-                      $('.App-input-general').css({
-
-                          height : newHeightInputGeneral
-                      });
-                      
-                      
+                     $('.talkbubble-text').text(this.value);
                       
                  });
+             
+                
+
+                  
              }
+
+
+             function loadChatConversation(){}   
 
 
 
              return{
 
                  clickImageLogo,
-                 autoGrowGenearlChat
+                 autoGrowGenearlChat,
+                 loadChatConversation
              }
        }
 
@@ -65,14 +64,32 @@
 
        main().clickImageLogo();
        main().autoGrowGenearlChat();
+
+       let classChatDiv = null;
+
          
 
        for (let index = 0; index < 100; index++) {
+
+              
+              if(index % 2 == 0){
+
+                  classChatDiv = 'App-content-dialogRight';
+
+              }else{
+                 
+                  classChatDiv = 'App-content-dialogLeft';
+              }
            
-              $('.App-content').append("<p>" + index + "</p>");
+              $('.App-content').append("<div class='App-content-dialog " + classChatDiv + "'><div class='talkbubble'></div></div>");
+              
        }
 
-       
+       let resultTime = new Date().getHours() + ':' + new Date().getMinutes();
+
+       let finalResultTime = resultTime;
+
+       $('.talkbubble').append("<div class='talkbubble-text'></div><div class='talkbubble-hour'><p>" + finalResultTime + "</p></div>");
        
     </script>
-</div>
+</div>3
