@@ -7,9 +7,10 @@
             <div class="App-logo"></div>
             <div class="App-login">
                 <div class="blockedImg"></div>
-                <div class="loginUsername"><p class="textUsername">Not logged</p></div>
+                <div class="loginUsername"><p class="textUsername">Log In</p></div>
             </div>
         </div>
+        <div class="App-menuHidden"></div>
         <div class="App-menu">
             <p class="menu menu-border">Principal</p>
             <p class="menu menu-border">Banned</p>
@@ -99,8 +100,9 @@
 
 
                       if(indexClickMenuButton == 0){
+               
 
-                          fetch('/src/menu/index.html')
+                          fetch('/src/menu/index.html?56')
 
                           .then(response => {
 
@@ -112,26 +114,27 @@
 
                                   return response.text();
                               }
-                          }).then(text => $('.App-content').append(text))
+                          }).then(text => $('.App-menuHidden').append(text))
 
                           .catch(function(e){
                               
                               console.log(e)
                           });
 
-                          indexClickMenuButton = 1;
 
+                          indexClickMenuButton = 1;
+                         
+                         
 
                       }else{
 
-                          $('.App-MenuDiv').remove();
+                           $('.App-MenuDiv').remove();
 
-                          indexClickMenuButton = 0;
+                        
+                           indexClickMenuButton = 0;
+
+                          
                       }
-
-
-                      console.log(indexClickMenuButton);
-
 
                 });
             }
@@ -155,6 +158,7 @@
        main().autoGrowInputGeneralChat();
        main().loadChatConversation();
        main().clickMenuButton();
+
 
        
     </script>

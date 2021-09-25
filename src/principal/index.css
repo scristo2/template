@@ -116,6 +116,15 @@
 }
 
 
+.App-menuHidden{
+
+     margin-bottom: 1vmin;
+     margin-top: 1vmin;
+     display: flex;
+     flex-direction: column;
+}
+
+
 .App-menu{
 
      background-color: #37707e;
@@ -155,12 +164,15 @@
      
      
      height: 100%;
-     overflow-y: scroll;
      order: 3;
      display: flex;
      flex-direction: column;
      background-color: #EEEEEE;
+     overflow-y: scroll;
+     
 }
+
+
 
 .App-content-dialog{
 
