@@ -11,67 +11,40 @@
             padding: 0;
             margin: 0;
         }
-        #root{
-
-
-            
-            border: 1px solid black;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;         
-            
-        }
-
-
-        
-        
-        
-        .test0{
-
-            background-color: red;
-            width: 30px;
-            
-            
-        }
-
-
-        .test1{
-
-            background-color: blue;
-            width: 30px;
-            
-            
-        }
-
-
-        .test2{
-
-            background-color: orange;
-            width: 30px;
-            
-            
-        }
-
-        
+       
 
 
     </style>
 </head>
 <body>
+
     <div id="root">
-        <div class="test test0">header</div>
-        <div class="test test1">content</div>
-        <div class="test test2">test</div>    
+        <input type="button" value="search" id="click">
     </div>
+    
     <script type="text/javascript" defer>
        window.onload = function(){
 
+           
+             var aa = function(){
 
-            var aa = "me llamo sergio y tengo 27 años";
 
-            var ss = aa.split('\n');
+                  function bb(nombre){console.log(nombre)}
 
-            console.log(ss);
+
+
+             return {
+
+                bb
+             }
+
+        }
+        
+        
+        aa().bb('sergio');
+                 
+           
+              
              
        }
     </script>

@@ -1,0 +1,153 @@
+.App-contentTemporal{
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.divHiddenLogin{
+
+     display: flex;
+     flex-direction: column;
+    
+}
+
+.formHiddenLogin{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1vmin;
+    
+}
+
+.formHiddenLogin > *{
+
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+}
+
+.inputHiddenLogin{
+
+    width: 90%;
+    height: calc(16px + 2vmin);
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    font-size: 16px;
+    
+}
+
+
+#submitHiddenLogin{
+
+    background-color: green;
+    color: white;
+    font-size: calc(10px + 2vmin);
+    padding: 1vmin;
+   
+}
+
+#resultLogin{
+
+    color: red;
+
+}
+
+
+.belowDivHiddenLogin{
+
+    display: flex;
+    flex-direction: column;
+    text-decoration: underline;
+    color: blue;
+}
+
+
+.belowDivHiddenInside{
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vmin;
+    
+    
+}
+
+
+.belowDivHiddenInside > *{
+
+    margin-left: 1vmin;
+}
+
+
+.belowHiddenLoginLogo{
+     width: 6vmin;
+     height: 6vmin;
+     mask-size: 100% 100%;
+     -webkit-mask-size: 100% 100%;
+     background: #ED213A;  /* fallback for old browsers */
+     background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+     background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     cursor: pointer;
+     
+}
+
+
+.textHiddenLoginBelow{
+
+    cursor: pointer;
+}
+
+
+.textHiddenLoginBelow:hover{
+
+    color: red;
+    text-decoration: none;
+}
+
+
+.resetPassword{
+
+    -webkit-mask-image: url(/src/images/resetPassword.svg);
+     mask-image: url(/src/images/resetPassword.svg);
+}
+
+
+.createAccount{
+
+    -webkit-mask-image: url(/src/images/register.svg);
+    mask-image: url(/src/images/register.svg);
+    background: #5433FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+
+
+@media screen and (min-width: 700px){
+
+    .inputHiddenLogin{
+
+         width: 60%;
+    }
+}
+
+
+
+@media screen and (min-width: 1100px) {
+
+     .inputHiddenLogin{
+
+         width: 30%;
+     }
+    
+}
+

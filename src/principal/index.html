@@ -99,7 +99,7 @@
                 $('.img-ButtonMenu').on('click', function(){
 
 
-                      if(indexClickMenuButton == 0){
+                      if(indexClickMenuButton == 0 || $('.App-MenuDiv').length == 0){
                
 
                           fetch('/src/menu/index.html?56')
@@ -118,7 +118,8 @@
 
                           .catch(function(e){
                               
-                              console.log(e)
+                              console.log(e);
+                              
                           });
 
 
@@ -129,8 +130,8 @@
                       }else{
 
                            $('.App-MenuDiv').remove();
-
-                        
+                           
+                         
                            indexClickMenuButton = 0;
 
                           

@@ -1,3 +1,5 @@
+@import url("/src/menu/login/index.css?=34");
+@import url("/src/menu/register/index.css?=67");
 .App-MenuDiv{
     
     color: white;
@@ -7,15 +9,18 @@
     text-decoration: underline;
     justify-content: center;
     align-items: center;
+    font-size: calc(6px + 2vmin);
+    cursor: pointer;
     
 } 
 
 .App-MenuDiv-bar{
      flex: 1;
      display: flex;
-     flex-flow: row wrap;
+     flex-direction: column;
      justify-content: center;
      align-items: center;
+     
 }
 
 
@@ -64,9 +69,57 @@
 }
 
 
+
+.searchGame{
+
+    -webkit-mask-image: url(/src/images/searchGame.svg);
+    mask-image: url(/src/images/searchGame.svg);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    background: #FDC830;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+.commercial{
+
+    -webkit-mask-image: url(/src/images/adverstiment.svg);
+    mask-image: url(/src/images/adverstiment.svg);
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    background: #FDC830;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+.contact{
+
+    -webkit-mask-image: url(/src/images/contact.svg);
+    mask-image: url(/src/images/contact.svg);
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    background: #FDC830;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
 .App-MenuDiv-text:hover{
 
     color: blue;
+}
+
+
+.buttonHiddenMenu{
+
+    border: 0;
+    font-size: calc(6px + 2vmin);
+    cursor: pointer;
 }
 
 
