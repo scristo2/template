@@ -18,33 +18,24 @@
 </head>
 <body>
 
-    <div id="root">
+    <div id="root" class="clase clasess">
         <input type="button" value="search" id="click">
     </div>
     
     <script type="text/javascript" defer>
        window.onload = function(){
 
+           var aa = document.querySelector('#root').classList;
+
+           var ss = aa.toggle('muajaja');
+
+
+           console.log(aa);
+
+
+
+           $('.muajaja').append('<p>this is ne w class</p>');
            
-             var aa = function(){
-
-
-                  function bb(nombre){console.log(nombre)}
-
-
-
-             return {
-
-                bb
-             }
-
-        }
-        
-        
-        aa().bb('sergio');
-                 
-           
-              
              
        }
     </script>

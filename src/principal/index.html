@@ -12,7 +12,7 @@
         </div>
         <div class="App-menuHidden"></div>
         <div class="App-menu">
-            <p class="menu menu-border">Principal</p>
+            <p class="menu menu-border" id="barPrincipal">Principal</p>
             <p class="menu menu-border">Banned</p>
             <p class="menu menu-border">Teams</p>
             <p class="menu" id="runes">Runes</p>
@@ -28,11 +28,29 @@
        
        
        var main = function main(){
+             
+            function restoreUrl(){
+                    
+                var state = {'action' : 'Make you own team or join to any'};
+                var title = "Make you own team or join to any";
+                var url = "/";
+
+                window.history.replaceState(state, title, url);
+
+            }
+
               
 
              function clickImageLogo(){
                 
                   $('.App-logo').on('click', function(){window.location.reload()});
+
+                  //if click image and url is diferent to principal
+
+                  if(window.location.href.includes('query')){
+
+                         restoreUrl();
+                  }
                   
                  
              }
@@ -99,10 +117,10 @@
                 $('.img-ButtonMenu').on('click', function(){
 
 
-                      if(indexClickMenuButton == 0 || $('.App-MenuDiv').length == 0){
+                      if(indexClickMenuButton == 0 || $('.App-MenuDiv').length == 0 || $('.App-MenuDiv').css('display') === 'none'){
                
 
-                          fetch('/src/menu/index.html?56')
+                          fetch('/src/menu/index.html?=56')
 
                           .then(response => {
 
@@ -124,12 +142,26 @@
 
 
                           indexClickMenuButton = 1;
-                         
-                         
+                          
+                          $('.App-MenuDiv').remove();
 
                       }else{
 
-                           $('.App-MenuDiv').remove();
+                            ///know if open menu from other site that not be principal
+
+                           if(window.location.href.includes('query')){
+
+                                $('.App-MenuDiv').css({
+                                    display : 'none'
+                                });
+
+                                console.log('Open menu from login');
+
+
+                           }else{
+
+                                $('.App-MenuDiv').remove();
+                           }
                            
                          
                            indexClickMenuButton = 0;
@@ -142,6 +174,26 @@
 
 
 
+            function clickBarPrincipalButton(){
+
+                   $('#barPrincipal').on('click', function(){
+
+                          if(window.location.href.includes('query')){
+
+                               loadChatConversation();
+                               $('.App-contentTemporal').remove();
+                               $('.App-footer').css({
+                                 display : 'flex'
+                               });
+
+                               restoreUrl();
+                          }
+
+                   });
+            }
+
+
+
 
 
              return{
@@ -149,7 +201,8 @@
                  clickImageLogo,
                  autoGrowInputGeneralChat,
                  loadChatConversation,
-                 clickMenuButton
+                 clickMenuButton,
+                 clickBarPrincipalButton
              }
        }
 
@@ -159,7 +212,8 @@
        main().autoGrowInputGeneralChat();
        main().loadChatConversation();
        main().clickMenuButton();
-
+       main().clickBarPrincipalButton();
+       
 
        
     </script>

@@ -2,22 +2,61 @@
     <div class="divHiddenLogin">
         <form action="#" method="POST" class="formHiddenLogin">
              <p id="resultLogin"></p>
+             <p>*Enter your Username or email</p>
              <input type="email" required placeholder="Email or username" class="inputHiddenLogin">
+             <p>*Enter your password</p>
              <input type="password" required placeholder="Password" class="inputHiddenLogin">
              <input type="submit" value="Access" id="submitHiddenLogin">
         </form>
        <div class="belowDivHiddenLogin">
-          <div class="belowDivHiddenInside">
+          <div class="belowDivHiddenInside belowDivHiddenInsideResetPassword">
               <div class="belowHiddenLoginLogo resetPassword"></div>
               <p class="textHiddenLoginBelow">Reset password</p>
           </div>
-          <div class="belowDivHiddenInside">
+          <div class="belowDivHiddenInside belowDivHiddenInsideCreateAccount">
             <div class="belowHiddenLoginLogo createAccount"></div>
             <p class="textHiddenLoginBelow">Create an account</p>
           </div>
        </div>    
     </div>
     <script type="text/javascript">
-       
+
+          var state = { 'actions' : 'Log In' };
+          var title = 'Log In';
+          var  url = '?query=login';
+
+          //only use one
+          history.pushState(state, title, url); //change url
+          
+          console.log($('.App-MenuDiv').css('display'));
+          
+          $('.belowDivHiddenInsideCreateAccount').on('click', function(){
+
+               $('.bar-Register').click();
+
+               console.log($('.App-MenuDiv').length);
+               console.log($('.App-MenuDiv').css('display'));
+          });
+
+          $('.belowDivHiddenInsideResetPassword').on('click', function(){
+
+                 $('.divHiddenLogin').remove();
+
+                 fetch('./src/menu/login/resetPassword/index.html')
+                 .then(response => {
+
+                      if(!response.ok){
+
+                          throw('An occured an problem');
+
+                      }else{
+
+                          return response.text();
+                      }
+
+                 }).then(result => $('.App-contentTemporal').append(result))
+                 .catch(function(e){console.log(e)});
+          });
+
     </script>
 </div>
