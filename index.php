@@ -54,7 +54,7 @@ function UrlNochacheScript(){
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="./src/index.js?<?php echo UrlNochacheScript();?>" type="module" defer></script>
+    <script src="./src/index.js?=<?php echo UrlNochacheScript();?>" type="module" defer></script>
     <!----change url src, delete template web--->
 </body>
 </html>

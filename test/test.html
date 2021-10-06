@@ -19,23 +19,58 @@
 <body>
 
     <div id="root" class="clase clasess">
-        <input type="button" value="search" id="click">
+        <input type="button" value="search" id="foo">
+        <input type="button" id="test">
     </div>
     
     <script type="text/javascript" defer>
        window.onload = function(){
+              
+              function test(){
 
-           var aa = document.querySelector('#root').classList;
+                return new Promise(function(resolve, reject){
 
-           var ss = aa.toggle('muajaja');
+                    $('body').append("<img src='../src/images/charging.gif' id='gg' width='200px' height='200px'>");
+
+                    fetch('./index.php')
+                    .then(response => {
 
 
-           console.log(aa);
+                        if(!response.ok){
+
+                            setTimeout(() => {
+                                reject('<h1>An ocurred an error</h1>');
+                            }, 5000);
+                        }else{
+
+                            resolve(response.text());
+                        }
+                    });
+              });
 
 
 
-           $('.muajaja').append('<p>this is ne w class</p>');
-           
+            }
+               
+              async function hola(){
+
+                     var result = await test();
+                     return result;
+              }
+
+              var initial = performance.now();
+              
+              
+              hola().then(function(resolve){
+
+                  $('#gg').remove(); 
+                  $('body').append(resolve);
+                
+              }, function(reject){
+                  $('#gg').remove();
+                  $('body').append(reject);
+              }).catch(function(e){alert(e)});
+
              
        }
     </script>

@@ -194,6 +194,28 @@
 
 
 
+            function clickLoginUsername(){
+
+
+                 $('.loginUsername').on('mousedown', function(e){
+                         
+                        if($('.blockedImg').css('webkit-mask-image').includes('blocked')){
+
+                              $('.img-ButtonMenu').click();
+                        }
+                        
+                 }).on('mouseup', function(e){
+
+                       if($('.bar-logIn').length > 0){
+                           
+                           $('.bar-logIn').click();
+                           console.log('you are not logged');
+                       }
+                 });
+            }
+
+
+
 
 
              return{
@@ -202,7 +224,8 @@
                  autoGrowInputGeneralChat,
                  loadChatConversation,
                  clickMenuButton,
-                 clickBarPrincipalButton
+                 clickBarPrincipalButton,
+                 clickLoginUsername
              }
        }
 
@@ -213,6 +236,7 @@
        main().loadChatConversation();
        main().clickMenuButton();
        main().clickBarPrincipalButton();
+       main().clickLoginUsername();
        
 
        

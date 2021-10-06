@@ -1,4 +1,4 @@
-import {App} from "../src/App.js?34"
+import {App} from "../src/App.js?=34"
 
 $(document).ready(function(){
      

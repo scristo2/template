@@ -49,9 +49,9 @@ export var App = function(){
 
      function pagePrincipal(){
 
+          
         
-        
-          getCodeFromPage("./src/principal/index.html?1", '#root');
+          getCodeFromPage("./src/principal/index.html?=1", '#root');
 
     
         
