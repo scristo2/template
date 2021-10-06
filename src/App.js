@@ -4,26 +4,31 @@ export var App = function(){
     //principal, login, register, activity
 
 
-     function getCodeFromPage(url, div){
+     function getCodeFromPage(url){
 
          
-          fetch(url)
+         return new Promise(function(resolve, reject){
 
-          .then(response => {
+            $('#root').append("<div class='App-loading'><img id='loadingGif'  src='./src/images/loading.gif'></div>");
 
-              if(!response.ok){
+            fetch(url)
+            .then(response => {
 
-                 throw('An ocurred an error');
-              
-              }else{
+                 if(!response.ok){
 
-                 return response.text();
-              }
+                     setTimeout(() => {
+                         reject('<h1>An ocurred an error :(</h1>');
+                     }, 2000);
 
-          }).then(text => $(div).append(text))
+                 }else{
 
-          .catch(function(e){console.log(e)});
-
+                     setTimeout(() => {
+                         resolve(response.text());
+                     }, 2000);
+                 }
+            }).catch(function(e){alert(e)});
+         });
+          
 
        
      }//end function getCodeFromPage
@@ -47,13 +52,13 @@ export var App = function(){
 
 
 
-     function pagePrincipal(){
+     async function pagePrincipal(){
 
           
         
-          getCodeFromPage("./src/principal/index.html?=1", '#root');
+          var result = await getCodeFromPage("./src/principal/index.html?=1");
 
-    
+          return result;  
         
     }
 
@@ -66,15 +71,25 @@ export var App = function(){
 
           //add principal page
 
-          pagePrincipal();
+          pagePrincipal().then(function(resolve){
+              
+                $('.App-loading').remove();
+                $('#root').append(resolve);
+
+          }, function(reject){
+               $('#loadingGif').remove(); 
+               $('.App-loading').append(reject);
+               $('.App-loading').append("<input type='button' value='retry' id='retryLoad'>");
+               $('#retryLoad').on('click', function(){
+                    window.location.reload();
+               });
+          });
      }
      
 
 
-
      return {
 
-         getCodeFromPage,
          main
      }
 }

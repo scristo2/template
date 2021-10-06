@@ -1,3 +1,2 @@
 <?php 
-sleep(10);
-echo "<h1>Resolved succesfully</h1>";
+echo $_SERVER['HTTP_USER_AGENT'];

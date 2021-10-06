@@ -19,80 +19,80 @@
         <div class="App-MenuDiv-logo contact"></div>
         <div class="App-MenuDiv-text textContact"><input type="button" class="buttonHiddenMenu" value="Contact"></div>
     </div>
+    <script type="text/javascript">
+        var clickHidden = function clickHiddenMenuItems(){
+      
+               function clickHiddenItem(itemClicked, urlGetCode){
+      
+                    $(itemClicked).on('click', function(){
+      
+                       //for make login i have to hidden footer and app-content-dialog
+      
+                        $('.App-content-dialog').css({
+      
+                             display : 'none'
+                        });
+      
+      
+                        $('.App-footer').css({
+      
+                          display : 'none'
+                        });          
+                        
+                        
+                        $('.App-MenuDiv').css({
+      
+                            display : 'none'
+      
+                        });
+                        
+                        $('.App-contentTemporal').remove();
+      
+      
+                        fetch(urlGetCode)
+                        .then(response => {
+      
+                           if(!response.ok){
+                               throw('Ha ocurrido un error');
+      
+                           }else{
+      
+                              return response.text();
+      
+      
+                           }
+                        }).then(result => $('.App-content').append(result))
+                        
+                        .catch(function(error){console.log(error)});
+      
+                    });
+               }
+      
+      
+               function clickHiddenLogIn(itemClicked, urlGetCode){
+      
+                    clickHiddenItem(itemClicked, urlGetCode);
+               }
+      
+      
+               function clickHiddenRegister(itemClicked, urlGetCode){
+      
+                    clickHiddenItem(itemClicked, urlGetCode);
+               }
+      
+               return {
+      
+                  clickHiddenLogIn,
+                  clickHiddenRegister,
+               }
+      
+      
+               
+        }
+      
+        clickHidden().clickHiddenLogIn('.bar-logIn', '/src/menu/login/index.html?=45');
+        clickHidden().clickHiddenRegister('.bar-Register', '/src/menu/register/index.html?=34');
+      
+        
+      </script>
 </div>
-<script type="text/javascript">
-  var clickHidden = function clickHiddenMenuItems(){
-
-         function clickHiddenItem(itemClicked, urlGetCode){
-
-              $(itemClicked).on('click', function(){
-
-                 //for make login i have to hidden footer and app-content-dialog
-
-                  $('.App-content-dialog').css({
-
-                       display : 'none'
-                  });
-
-
-                  $('.App-footer').css({
-
-                    display : 'none'
-                  });          
-                  
-                  
-                  $('.App-MenuDiv').css({
-
-                      display : 'none'
-
-                  });
-                  
-                  $('.App-contentTemporal').remove();
-
-
-                  fetch(urlGetCode)
-                  .then(response => {
-
-                     if(!response.ok){
-                         throw('Ha ocurrido un error');
-
-                     }else{
-
-                        return response.text();
-
-
-                     }
-                  }).then(result => $('.App-content').append(result))
-                  
-                  .catch(function(error){console.log(error)});
-
-              });
-         }
-
-
-         function clickHiddenLogIn(itemClicked, urlGetCode){
-
-              clickHiddenItem(itemClicked, urlGetCode);
-         }
-
-
-         function clickHiddenRegister(itemClicked, urlGetCode){
-
-              clickHiddenItem(itemClicked, urlGetCode);
-         }
-
-         return {
-
-            clickHiddenLogIn,
-            clickHiddenRegister,
-         }
-
-
-         
-  }
-
-  clickHidden().clickHiddenLogIn('.bar-logIn', '/src/menu/login/index.html?=45');
-  clickHidden().clickHiddenRegister('.bar-Register', '/src/menu/register/index.html?=34');
-
-  
-</script>

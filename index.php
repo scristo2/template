@@ -54,6 +54,12 @@ function UrlNochacheScript(){
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="text/javascript" defer>
+        if(window.navigator.userAgent.toString().toLocaleLowerCase().indexOf('msie') > -1 || window.navigator.userAgent.toString().toLocaleLowerCase().indexOf('trident') > -1){
+
+            document.write('<p>This browser is not compatible with this app</p>');
+        }
+    </script>
     <script src="./src/index.js?=<?php echo UrlNochacheScript();?>" type="module" defer></script>
     <!----change url src, delete template web--->
 </body>

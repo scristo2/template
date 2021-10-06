@@ -106,7 +106,37 @@
             
                    
             }
-            
+
+
+            ///1
+            function getCodeMenu(){
+
+                  return new Promise(function(resolve, reject){
+
+                        fetch('/src/menu/index.html?=56')
+                        .then(response => {
+
+                            if(!response.ok){
+
+                                reject('Error when trying to open the menu');
+
+                            }else{
+
+                                 resolve(response.text());
+                            }
+                        });
+                  });
+
+            }
+
+             
+            ///2
+            async function openMenuAfterGetCode(){
+
+
+                  var result = await getCodeMenu();
+                  return result;
+            }
             
             
             
@@ -120,26 +150,15 @@
                       if(indexClickMenuButton == 0 || $('.App-MenuDiv').length == 0 || $('.App-MenuDiv').css('display') === 'none'){
                
 
-                          fetch('/src/menu/index.html?=56')
-
-                          .then(response => {
-
-                              if(!response.ok){
-
-                                  throw('An ocurred an problem load menu');
-
-                              }else{
-
-                                  return response.text();
-                              }
-                          }).then(text => $('.App-menuHidden').append(text))
-
-                          .catch(function(e){
+                          openMenuAfterGetCode().then(function(resolve){
                               
-                              console.log(e);
-                              
+                              $('.App-menuHidden').append(resolve);
+                              console.log('fetch succesfully menu');
+
+                          }, function(reject){
+
+                               console.log(reject);
                           });
-
 
                           indexClickMenuButton = 1;
                           
