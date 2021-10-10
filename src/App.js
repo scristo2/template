@@ -3,7 +3,7 @@ export var App = function(){
 
     //principal, login, register, activity
 
-
+      //1
      function getCodeFromPage(url){
 
          
@@ -26,7 +26,7 @@ export var App = function(){
                          resolve(response.text());
                      }, 2000);
                  }
-            }).catch(function(e){alert(e)});
+            }).catch(function(e){console.log(e)});
          });
           
 
@@ -50,7 +50,8 @@ export var App = function(){
           head.appendChild(style);
      }
 
-
+     
+     //2
 
      async function pagePrincipal(){
 
@@ -76,6 +77,9 @@ export var App = function(){
                 $('.App-loading').remove();
                 $('#root').append(resolve);
 
+                document.cookie = "username=madi431; expires=Thu 2013 12:00:00 UTC";
+                document.cookie = "password=345; expires=Thu 2013 12:00:00 UTC";
+
           }, function(reject){
                $('#loadingGif').remove(); 
                $('.App-loading').append(reject);
@@ -83,6 +87,30 @@ export var App = function(){
                $('#retryLoad').on('click', function(){
                     window.location.reload();
                });
+          }).then(function(){
+
+              ///if cookie are registred 
+
+             var getCookie = document.cookie.toString();
+
+             var checkCookieUsernameAndPassword = getCookie.includes('username=') && getCookie.includes('password');
+
+
+             alert(document.cookie);
+
+
+              if(checkCookieUsernameAndPassword){
+
+                  $('.blockedImg').css({
+
+                      'webkit-mask-image' : 'url(/src/images/profile.svg)',
+                      'mask-image' : 'url(/src/images/profile.svg)'
+                  });
+
+                  var checkCookieUsername = getCookie.split(';', 1);
+                  var getCookieUsername = checkCookieUsername[0].toString().replace('username=', '');
+                  $('.textUsername').text(getCookieUsername);
+              }
           });
      }
      

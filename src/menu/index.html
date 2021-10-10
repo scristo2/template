@@ -21,51 +21,79 @@
     </div>
     <script type="text/javascript">
         var clickHidden = function clickHiddenMenuItems(){
-      
+
+               //1
+
+               function getCodeHiddenItem(itemClicked,urlGetCode){
+
+                   return new Promise(function(resolve, reject){
+
+                        fetch(urlGetCode)
+                        .then(response => {
+
+                            if(!response.ok){
+
+                                reject('An ocurred an error when you have tried get code ' + itemClicked);
+                                  
+                            }else{
+
+                                 resolve(response.text());
+                            }
+                        });
+                   });
+               }
+
+
+               //2
+              async function afterGetCodeHiddenItem(itemClicked, urlGetCode){
+
+                     var result = await getCodeHiddenItem(itemClicked, urlGetCode);
+                     return result;
+               }
+
+
+         
                function clickHiddenItem(itemClicked, urlGetCode){
       
                     $(itemClicked).on('click', function(){
       
                        //for make login i have to hidden footer and app-content-dialog
+
+                       $('.App-content-dialog').css({
       
-                        $('.App-content-dialog').css({
-      
-                             display : 'none'
+                              display : 'none'
                         });
-      
-      
-                        $('.App-footer').css({
-      
-                          display : 'none'
-                        });          
-                        
-                        
-                        $('.App-MenuDiv').css({
-      
+
+
+                       $('.App-footer').css({
+
                             display : 'none'
-      
+                        });          
+ 
+ 
+                       $('.App-MenuDiv').css({
+
+                           display : 'none'
+
                         });
-                        
-                        $('.App-contentTemporal').remove();
+ 
+                       $('.App-contentTemporal').remove();
+
+
+                       afterGetCodeHiddenItem(itemClicked, urlGetCode).then(function(resolve){
+
+                            $('.App-content').append(resolve);
+                            console.log('Fecth items hidden :)');
+
+                        }, function(reject){
+
+                           console.log(reject);
+                       
+                        });
+
+                        //<<<<
       
-      
-                        fetch(urlGetCode)
-                        .then(response => {
-      
-                           if(!response.ok){
-                               throw('Ha ocurrido un error');
-      
-                           }else{
-      
-                              return response.text();
-      
-      
-                           }
-                        }).then(result => $('.App-content').append(result))
-                        
-                        .catch(function(error){console.log(error)});
-      
-                    });
+                      });
                }
       
       

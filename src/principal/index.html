@@ -39,6 +39,8 @@
 
             }
 
+
+
               
 
              function clickImageLogo(){
@@ -124,7 +126,7 @@
 
                                  resolve(response.text());
                             }
-                        });
+                        }).catch(function(e){console.log(e)});
                   });
 
             }
@@ -154,10 +156,19 @@
                               
                               $('.App-menuHidden').append(resolve);
                               console.log('fetch succesfully menu');
-
+                              
                           }, function(reject){
 
                                console.log(reject);
+
+                          }).then(function(){
+                               
+                               //if he has already logged
+                              if($('.blockedImg').css('webkit-mask-image').includes('profile')){
+
+                                   $('.bar-logIn').css({display : 'none'});
+                                   $('.bar-Register').css({display : 'none'});
+                              }
                           });
 
                           indexClickMenuButton = 1;
@@ -225,10 +236,18 @@
                         
                  }).on('mouseup', function(e){
 
-                       if($('.bar-logIn').length > 0){
+                       if($('.blockedImg').css('webkit-mask-image').includes('profile')){
+
+                             alert('ya estas logado');
+
+
+                       }else{
+
+                             if($('.bar-logIn').length > 0){
                            
-                           $('.bar-logIn').click();
-                           console.log('you are not logged');
+                                  $('.bar-logIn').click();
+                                  console.log('you are not logged');
+                            }
                        }
                  });
             }
@@ -244,12 +263,13 @@
                  loadChatConversation,
                  clickMenuButton,
                  clickBarPrincipalButton,
-                 clickLoginUsername
+                 clickLoginUsername,
+                 
              }
        }
 
 
-
+     
        main().clickImageLogo();
        main().autoGrowInputGeneralChat();
        main().loadChatConversation();

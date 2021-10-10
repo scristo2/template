@@ -1,13 +1,19 @@
 <div class="App-contentTemporal">
     <div class="divHiddenLogin">
-        <form action="#" method="POST" class="formHiddenLogin">
+        <div class="formHiddenLogin">
+            <h1>Log In</h1>
              <p id="resultLogin"></p>
              <p>*Enter your Username or email</p>
-             <input type="email" required placeholder="*******" class="inputHiddenLogin">
+             <input type="email" required placeholder="******" class="inputHiddenLogin">
              <p>*Enter your password</p>
              <input type="password" required placeholder="******" class="inputHiddenLogin">
+             <div class="checkBox">
+                 <input type="checkbox">
+                 <p>Remember sesion</p>
+             </div>
              <input type="submit" value="Access" id="submitHiddenLogin">
-        </form>
+            </div>
+        <hr>
        <div class="belowDivHiddenLogin">
           <div class="belowDivHiddenInside belowDivHiddenInsideResetPassword">
               <div class="belowHiddenLoginLogo resetPassword"></div>
@@ -29,6 +35,36 @@
           history.pushState(state, title, url); //change url
           
           console.log($('.App-MenuDiv').css('display'));
+
+
+          //1
+          function getCodeResetPassword(){
+
+               return new Promise(function(resolve, reject){
+
+                     fetch('./src/menu/login/resetPassword')
+                     .then(response => {
+
+                           if(!response.ok){
+
+                              reject('An ocurred an error when you have tried get the reset Password code');
+                           
+                            }else{
+
+                                resolve(response.text());
+                            }
+                     }).catch(function(e){console.log(e)})
+               });
+          }
+
+          
+          //2
+          async function afterGetCodeResetPassword(){
+
+              var result = await getCodeResetPassword();
+              return result;
+          }
+
           
           $('.belowDivHiddenInsideCreateAccount').on('click', function(){
 
@@ -42,20 +78,14 @@
 
                  $('.divHiddenLogin').remove();
 
-                 fetch('./src/menu/login/resetPassword/index.html')
-                 .then(response => {
+                 afterGetCodeResetPassword().then(function(resolve){
 
-                      if(!response.ok){
+                    $('.App-contentTemporal').append(resolve);
+                    console.log('fetch resetPassword :)');
+                 }, function(reject){
 
-                          throw('An occured an problem');
-
-                      }else{
-
-                          return response.text();
-                      }
-
-                 }).then(result => $('.App-contentTemporal').append(result))
-                 .catch(function(e){console.log(e)});
+                       console.log(reject);
+                 });
           });
 
     </script>
