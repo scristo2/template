@@ -77,9 +77,6 @@ export var App = function(){
                 $('.App-loading').remove();
                 $('#root').append(resolve);
 
-                document.cookie = "username=madi431; expires=Thu 2013 12:00:00 UTC";
-                document.cookie = "password=345; expires=Thu 2013 12:00:00 UTC";
-
           }, function(reject){
                $('#loadingGif').remove(); 
                $('.App-loading').append(reject);
@@ -95,8 +92,6 @@ export var App = function(){
 
              var checkCookieUsernameAndPassword = getCookie.includes('username=') && getCookie.includes('password');
 
-
-             alert(document.cookie);
 
 
               if(checkCookieUsernameAndPassword){
