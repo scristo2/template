@@ -240,7 +240,16 @@
                          
                         if($('.blockedImg').css('webkit-mask-image').includes('blocked')){
 
-                              $('.img-ButtonMenu').click();
+                              if($('.bar-Search').length > 0){
+
+                                    $('.bar-logIn').click();
+
+                              }else{
+
+                                $('.img-ButtonMenu').click();
+                                
+                              }
+
                         }
                         
                  }).on('mouseup', function(e){
@@ -252,11 +261,7 @@
 
                        }else{
 
-                             if($('.bar-logIn').length > 0){
-                           
-                                  $('.bar-logIn').click();
-                                  console.log('you are not logged');
-                            }
+                            $('.bar-logIn').click();
                        }
                  });
             }

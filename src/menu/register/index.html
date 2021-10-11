@@ -8,7 +8,7 @@
             <input type="text" placeholder="******" class="inputHiddenLogin" id="inputHiddenEmail">
             <p>*Enter your username</p>
             <p class="registerNotValid" id="resultUsernameRegister"></p>
-            <input type="text" placeholder="******" class="inputHiddenLogin">
+            <input type="text" id="inputHiddenUsername" placeholder="******" class="inputHiddenLogin">
             <p>*Enter your password</p>
             <p class="registerNotValid" id="resultPasswordRegister"></p>
             <input type="password" placeholder="******" class="inputHiddenLogin">
@@ -26,15 +26,16 @@
 
 
         var errorsRegister = {
-
+            
             emailExistsError : "This email is already registered",
             emailFormatError : "The email format is not correct",
             usernameExistsError : "This username is already registered",
-            usernameLengthError : "Your username must be between 3 and 12 characters",
+            usernameLengthError : "Your username must be between 3 and 24 characters",
             passwordErrorMatch : 'Passwords do not match',
             passwordLengthError : 'Your password must be between 3 and 12 characters',
             inputEmptyError : 'This field is required'
         }
+
 
 
 
@@ -86,6 +87,32 @@
                            $('#resultEmailRegister').text('');
 
                            //check if username length > 3 && <= 12
+
+                           if($('#inputHiddenUsername').val().length < 3 || $('#inputHiddenUsername').val().length > 24){
+
+                                 $('#resultUsernameRegister').text(errorsRegister['usernameLengthError']);
+
+                                 $('#inputHiddenUsername').css({
+
+                                      backgroundColor : 'red',
+                                      color : '#ffffff'
+                                 });
+
+                                 $('.App-content').scrollTop(0);
+                           
+                            }else{
+
+                                 $('#inputHiddenUsername').css({
+
+                                     backgroundColor : 'white',
+                                     color : '#000000'
+                                 });
+
+                                 $('#resultUsernameRegister').text('');
+
+
+                                 
+                            }
                     }
               }
 
