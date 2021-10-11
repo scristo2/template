@@ -37,23 +37,60 @@
         }
 
 
+
         $('#submitHiddenRegister').on('click', function(){
 
-             
-             if($('#inputHiddenEmail').val().length >= 3 && $('#inputHiddenEmail').val().length <= 12){
 
-                //chech if email has an error
+              //check if email is in empty
 
-                if($('#resultEmailRegister').text().length > 1){
+              if($('#inputHiddenEmail').val().length < 3){
+                    
+                    $('#resultEmailRegister').text(errorsRegister['inputEmptyError']);
+                    $('.App-content').scrollTop(0);
+                    $('#inputHiddenEmail').css({
+                        backgroundColor : 'red',
+                        color : 'white'
+                    });
+
+
+                    //check if email is corretly format
+
+                   
+              }else{
+
+                    $('#inputHiddenEmail').css({
+                        color : 'black',
+                        backgroundColor : 'white'
+                    });
 
                     $('#resultEmailRegister').text('');
-                }
 
-             }else{
+                    //check if email is corretly format
 
-                 $('#resultEmailRegister').text(errorsRegister['usernameLengthError']);
-                 $('.App-content').scrollTop(0);
-             }
+                    if(!$('#inputHiddenEmail').val().includes('@')){
+
+                            $('#resultEmailRegister').text(errorsRegister['emailFormatError']);
+                            $('.App-content').scrollTop(0);
+                            $('#inputHiddenEmail').css({
+                                  backgroundColor : 'red',
+                                  color : 'white'
+                            });
+
+                    }else{
+
+                            $('#inputHiddenEmail').css({
+                                 backgroundColor : 'white',
+                                 color : 'black'
+                            });
+
+                           $('#resultEmailRegister').text('');
+
+                           //check if username length > 3 && <= 12
+                    }
+              }
+
+              
+             
         });
     </script>
 </div>

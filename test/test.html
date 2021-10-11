@@ -25,51 +25,31 @@
     
     <script type="text/javascript" defer>
        window.onload = function(){
-              
-              function test(){
+             
+            var data = new FormData();
+            data.append('username', 'madi431');
+ 
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../test/index.php');
+            xhr.onreadystatechange = function(){
 
-                return new Promise(function(resolve, reject){
+                if(this.readyState == 4){
 
-                    $('body').append("<img src='../src/images/charging.gif' id='gg' width='200px' height='200px'>");
+                    if(this.status == 200){
 
-                    fetch('./index.php')
-                    .then(response => {
+                        document.write('<p>' + this.responseText + '</p>');
+                    
+                    }else{
 
-
-                        if(!response.ok){
-
-                            setTimeout(() => {
-                                reject('<h1>An ocurred an error</h1>');
-                            }, 5000);
-                        }else{
-
-                            resolve(response.text());
-                        }
-                    });
-              });
-
-
-
-            }
-               
-              async function hola(){
-
-                     var result = await test();
-                     return result;
-              }
-
-              var initial = performance.now();
-              
-              
-              hola().then(function(resolve){
-
-                  $('#gg').remove(); 
-                  $('body').append(resolve);
+                        document.write('<h1>An ocurred an error</h1>');
+                    }
                 
-              }, function(reject){
-                  $('#gg').remove();
-                  $('body').append(reject);
-              }).catch(function(e){alert(e)});
+                }
+            };
+
+
+            xhr.send(data);
+            
 
              
        }
