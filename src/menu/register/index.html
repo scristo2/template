@@ -42,82 +42,11 @@
         $('#submitHiddenRegister').on('click', function(){
 
 
-              //check if email is in empty
-
-              if($('#inputHiddenEmail').val().length < 3){
-                    
-                    $('#resultEmailRegister').text(errorsRegister['inputEmptyError']);
-                    $('.App-content').scrollTop(0);
-                    $('#inputHiddenEmail').css({
-                        backgroundColor : 'red',
-                        color : 'white'
-                    });
-
-
-                    //check if email is corretly format
-
-                   
-              }else{
-
-                    $('#inputHiddenEmail').css({
-                        color : 'black',
-                        backgroundColor : 'white'
-                    });
-
-                    $('#resultEmailRegister').text('');
-
-                    //check if email is corretly format
-
-                    if(!$('#inputHiddenEmail').val().includes('@')){
-
-                            $('#resultEmailRegister').text(errorsRegister['emailFormatError']);
-                            $('.App-content').scrollTop(0);
-                            $('#inputHiddenEmail').css({
-                                  backgroundColor : 'red',
-                                  color : 'white'
-                            });
-
-                    }else{
-
-                            $('#inputHiddenEmail').css({
-                                 backgroundColor : 'white',
-                                 color : 'black'
-                            });
-
-                           $('#resultEmailRegister').text('');
-
-                           //check if username length > 3 && <= 12
-
-                           if($('#inputHiddenUsername').val().length < 3 || $('#inputHiddenUsername').val().length > 24){
-
-                                 $('#resultUsernameRegister').text(errorsRegister['usernameLengthError']);
-
-                                 $('#inputHiddenUsername').css({
-
-                                      backgroundColor : 'red',
-                                      color : '#ffffff'
-                                 });
-
-                                 $('.App-content').scrollTop(0);
-                           
-                            }else{
-
-                                 $('#inputHiddenUsername').css({
-
-                                     backgroundColor : 'white',
-                                     color : '#000000'
-                                 });
-
-                                 $('#resultUsernameRegister').text('');
-
-
-                                 
-                            }
-                    }
-              }
-
+                       //
               
              
         });
+
+
     </script>
 </div>

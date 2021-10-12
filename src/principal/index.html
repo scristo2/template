@@ -28,7 +28,9 @@
        
        
        var main = function main(){
-             
+
+            var indexClickMenuButton = 0;
+        
             function restoreUrl(){
                     
                 var state = {'action' : 'Make you own team or join to any'};
@@ -144,7 +146,6 @@
             
             function clickMenuButton(){
 
-                var indexClickMenuButton = 0;
 
                 $('.img-ButtonMenu').on('click', function(){
 
@@ -233,38 +234,28 @@
 
 
 
+
+
             function clickLoginUsername(){
 
 
-                 $('.loginUsername').on('mousedown', function(e){
-                         
-                        if($('.blockedImg').css('webkit-mask-image').includes('blocked')){
 
-                              if($('.bar-Search').length > 0){
 
-                                    $('.bar-logIn').click();
+                 $('.loginUsername').on('click', function(e){
 
-                              }else{
+                         if($('.App-MenuDiv').css('display') === 'flex'){
+                              
+                               $('.bar-logIn').click();
+                             
+                        }else{
 
-                                $('.img-ButtonMenu').click();
-                                
-                              }
-
+                             //
                         }
-                        
-                 }).on('mouseup', function(e){
 
-                       if($('.blockedImg').css('webkit-mask-image').includes('profile')){
-
-                             alert('ya estas logado');
-
-
-                       }else{
-
-                            $('.bar-logIn').click();
-                       }
                  });
-            }
+                         
+                        
+           }
 
 
 
