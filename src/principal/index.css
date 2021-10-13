@@ -210,7 +210,7 @@
 
 .App-menu{
 
-    width: auto;
+    width: calc(30vmin);
     overflow-y: auto;
     height: 100%;
     padding: 2vmin;

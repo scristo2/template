@@ -3,12 +3,8 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     flex-direction: row;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    flex-flow: wrap;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -31,9 +27,12 @@
 
 .App-menu-elements :hover{
 
-    background-color: blue;
-    color: white;
+    text-decoration: underline;
+    
 }
+
+
+
 
 .App-menu-elements-img{
 
@@ -46,8 +45,10 @@
 
 .App-menu-elements-text{
 
-    margin-left: 1vmin;
+    
     font-size: 4vmin;
+    margin-left: 1vmin;
+    
 }
 
 
@@ -56,7 +57,7 @@
 
     .App-menu-elements-text{
 
-        font-size: 3vmin;
+        font-size: 2vmin;
     }
     
 }
