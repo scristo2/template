@@ -1,0 +1,62 @@
+.App-menu-elements{
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.App-menu-elements:not(:first-child){
+
+    margin-top: 8vmin;
+}
+
+.App-menu-elements:last-child{
+
+    margin-bottom: 8vmin;
+}
+
+
+.App-menu-elements :hover{
+
+    background-color: blue;
+    color: white;
+}
+
+.App-menu-elements-img{
+
+    width: 6vmin;
+    height:6vmin;
+    -webkit-filter: brightness(1.1);
+    filter: brightness(1.1);
+    mix-blend-mode: multiply;
+}
+
+.App-menu-elements-text{
+
+    margin-left: 1vmin;
+    font-size: 4vmin;
+}
+
+
+@media screen and (min-width: 700px) {
+
+
+    .App-menu-elements-text{
+
+        font-size: 3vmin;
+    }
+    
+}

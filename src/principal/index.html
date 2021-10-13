@@ -1,0 +1,48 @@
+<div class="App">
+    <div class="App-header">
+        <div class="App-header-elements">
+            <div class="App-header-elements-inside">
+                <div class="App-header-elements-inside-div-MenuButton">
+                    <img src="/src/images/menuImg.png" alt="Click menu button" class="App-header-elements-inside-div-imgButtonmenu">
+                </div>
+            </div>
+            <div class="App-header-elements-inside">
+                <div class="App-header-elements-inside-div-Logo">
+                    <img src="/src/images/leagueOfLegends.png" alt="Click logo" class="App-header-elements-inside-div-imgLogo">
+                </div>
+            </div>
+            <div class="App-header-elements-inside">
+                <div class="App-header-elements-inside-div-blocked">
+                    <div class="App-header-elements-inside-div-blockedDivImg">
+                        <img class="App-header-elements-inside-div-imgBlocked" src="/src/images/blockedPng.png" alt="Image">
+                    </div>
+                    <div class="App-header-elements-inside-div-blockedDivText">
+                        <input type="button" value="Log in" class="App-header-elements-inside-div-blockedDivTextP">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="App-content">
+        <div class="App-menu"></div>
+        <script type="text/javascript">
+           $('.App-header-elements-inside-div-MenuButton').on('click', function(){
+               if($('.App-menu').css('display') === 'none'){
+
+                     $('.App-menu').css({display : 'flex'});
+               
+                }else{
+
+                    $('.App-menu').css({display : 'none'});
+                }
+           });
+        </script>
+        <div class="App-content-temporal"></div>
+        <script>
+            for (let index = 0; index < 10; index++) {
+               $('.App-content-temporal').append("<p>" + index + "</p>");
+            }
+        </script>
+    </div>
+    <div class="App-footer">this is teh footer</div>
+</div>

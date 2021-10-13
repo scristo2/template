@@ -6,16 +6,7 @@
 
                            Sergio Cristobal
 
-         -->
-<?php
-
-function UrlNochacheScript(){
-    $list = range(0,100);
-    shuffle($list);
-    return $list[10]; 
-}
-
-?>         
+         -->       
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,14 +44,12 @@ function UrlNochacheScript(){
 </head>
 <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script type="text/javascript" defer>
-        if(window.navigator.userAgent.toString().toLocaleLowerCase().indexOf('msie') > -1 || window.navigator.userAgent.toString().toLocaleLowerCase().indexOf('trident') > -1){
-
-            document.write('<p>This browser is not compatible with this app</p>');
-        }
+    <script type="text/javascript">
+       if(window.navigator.userAgent.toString().toLocaleLowerCase().indexOf('msie') > -1 || window.navigator.userAgent.toString().toLocaleLowerCase().indexOf('trident') > -1){
+           document.write('<p>This navigator dont support this app.<p>')
+       }
     </script>
-    <script src="./src/index.js?=<?php echo UrlNochacheScript();?>" type="module" defer></script>
-    <!----change url src, delete template web--->
+    <script src="/src/index.js?/cache=34" defer type="module"></script>
+    <div id="root"></div>
 </body>
 </html>
