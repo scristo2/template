@@ -6,7 +6,7 @@
 
 .App-header{
 
-     background-color: #BFF1C7;
+     background-color: #DCEEC7;
      display: -webkit-box;
      display: -ms-flexbox;
      display: flex;
@@ -210,15 +210,19 @@
 
 .App-menu{
 
-    width: calc(30vmin);
+    width: 30vmin;
     overflow-y: auto;
     height: 100%;
     padding: 2vmin;
     display: none;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #C6FFDD;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
    
 }
 
@@ -232,7 +236,7 @@
             flex: 4;
     overflow-y: auto;
     height: 100%;
-    background-color: #E6FDFF;
+    background-color: #ffffff;
 }
 
 
@@ -241,10 +245,43 @@
 
     background-color: white;
     -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-    
+    -ms-flex-order: 2;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center; 
+}
 
+
+.App-footerElements{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.App-footerElements-textarea{
+
+    width: 60vmin;
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    font-size: 16px;
+    resize: none;
+}
+
+
+.App-footerElements-input{
+
+    font-size: calc(16px + 2vmin);
+    
 }
 
 
@@ -277,6 +314,12 @@
             -ms-flex-order: 3;
 
                 order: 3;
+    }
+
+
+    .App-footerElements{
+
+       
     }
 
 
