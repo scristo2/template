@@ -281,7 +281,7 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
 .App-footerElements-input{
 
     font-size: calc(16px + 2vmin);
-    
+    font-size: -webkit-calc(16px + 2vmin);
 }
 
 

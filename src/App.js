@@ -83,6 +83,7 @@ export class App{
                $('.App-loading').remove();
                $('#root').append(resolve['getResultPrincipalPage']);
                $('.App-menu').append(resolve['getResultPrincipalMenu']);
+               $('.App-content-temporal').append('<h1>Loading.....</h1>');
                
             }, 
              function(reject){

@@ -37,12 +37,13 @@
                 }
            });
         </script>
-        <div class="App-content-temporal"></div>
-        <script>
-            for (let index = 0; index < 100; index++) {
-               $('.App-content-temporal').append("<p>" + index + "</p>");
-            }
-        </script>
+        <div class="App-content-temporal">
+            <script type="text/javascript" defer async>
+               setInterval(() => {
+                    $('.App-content-temporal').load('/src/bot/index.php');
+               }, 1000);
+            </script>
+        </div>
     </div>
     <div class="App-footer">
         <div class="App-footerElements">
@@ -50,6 +51,16 @@
             <input type="button" value="&#128515;" class="App-footerElements-input">
             <textarea class="App-footerElements-textarea" placeholder="Tell us something"></textarea>
             <input type="button" value="&#10148;" class="App-footerElements-input">
+            <script type="text/javascript">
+               $('.App-footerElements-textarea').on('input',function(){
+                    
+                     if(this.scrollHeight < (16 * 6)){
+                        this.style.height = 'auto';
+                        this.style.height = this.scrollHeight + 'px';
+
+                     }
+               });
+            </script>
         </div>
     </div>
 </div>
