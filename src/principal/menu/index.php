@@ -1,3 +1,6 @@
+<?php
+
+?>
 <div class="App-menu-elements">
     <img src="/src/images/home.png" alt="Image" class="App-menu-elements-img">
     <p class="App-menu-elements-text">Home</p>

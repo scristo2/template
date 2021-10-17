@@ -204,8 +204,10 @@
             flex-direction: row;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    overflow-y: hidden;
+        overflow: hidden;
+   
 }
+
 
 
 .App-menu{
@@ -219,8 +221,8 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    background: #C6FFDD;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: #C6FFDD;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-gradient(linear, left top, right top, from(#f7797d), color-stop(#FBD786), to(#C6FFDD));
 background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
    
@@ -230,13 +232,52 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
 .App-content-temporal{
 
     -webkit-box-flex: 4;
-
-        -ms-flex: 4;
-
-            flex: 4;
+    -ms-flex: 4;
+    flex: 4;
     overflow-y: auto;
     height: 100%;
     background-color: #ffffff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+     flex-direction: column;
+    
+}
+
+
+
+#App-content-temporaL-loading{
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     
+}
+
+
+.imgLoadingChat{
+
+    width: 30vmin;
+    height: 15vmin;
+}
+
+
+.App-content-temporal-divs{
+
+    height: 100%;
+    border-bottom: 1px solid white;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+
+.App-content-temporal-chat{
+
+    flex-direction: column;
+    display: none;
 }
 
 
@@ -247,21 +288,42 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
     -webkit-box-ordinal-group: 3;
     -ms-flex-order: 2;
     order: 2;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: center;
-    align-items: center; 
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; 
 }
 
 
 .App-footerElements{
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 
@@ -280,8 +342,7 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
 
 .App-footerElements-input{
 
-    font-size: calc(16px + 2vmin);
-    font-size: -webkit-calc(16px + 2vmin);
+    font-size: 4vmin
 }
 
 

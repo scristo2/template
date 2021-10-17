@@ -38,11 +38,73 @@
            });
         </script>
         <div class="App-content-temporal">
+          <div class="App-content-temporal-divs App-content-temporal-chat">
             <script type="text/javascript" defer async>
+               function getCodeChatPrincipal(){
+
+                 return new Promise(function(resolve, reject){
+
+                      var xhr = new XMLHttpRequest();
+                      xhr.open('GET', './src/bot/index.php', true);
+                      xhr.onload = function(){
+
+                           if(xhr.readyState == 4 && xhr.status == 200){
+
+                                setTimeout(() => {
+                                    resolve(xhr.responseText);
+                                }, 10);
+                           
+                            }else{
+
+                                setTimeout(() => {
+                                    reject({readyStateError : this.readyState, StatusError : this.status});
+                                }, 10);
+                            }
+                      }
+
+                      xhr.onerror = function(){
+
+                         setTimeout(() => {
+                             setInterval(() => {
+                                reject({readyStateError : this.readyState, StatusError : this.status});
+                             }, 10);
+                         }, 10);
+                      }
+
+
+                      xhr.ontimeout = function(){
+
+                        setTimeout(() => {
+                            reject({readyStateError : this.readyState, StatusError : this.status});
+                        }, 10);
+                      }
+
+
+                      xhr.send(null);
+                 });
+
+
+               }
+
+
+               async function afterGetCodePrincipalChat(){
+
+                 var result = await getCodeChatPrincipal();
+                 return result;
+               }
+
                setInterval(() => {
-                    $('.App-content-temporal').load('/src/bot/index.php');
-               }, 1000);
+               afterGetCodePrincipalChat().then(function(resolve){
+                   $('#imgLoadingChat').remove();
+                  $('.App-content-temporal-chat').html(resolve);
+               }, function(reject){
+                  $('.App-content-temporal-chat').html('<h1>An ocuured an error</h1>');
+               });
+           }, 2000);
+               
+
             </script>
+            </div>
         </div>
     </div>
     <div class="App-footer">

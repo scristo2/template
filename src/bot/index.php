@@ -2,9 +2,8 @@
 error_reporting(0);
 $hostname = 'localhost';
 $username ='root';
-$password = 'root';
+$password = '';
 $database = 'website';
-
 
 try{
 
@@ -16,7 +15,10 @@ try{
     
     }else{
 
-        echo "you are connected";
+       date_default_timezone_set('Europe/Madrid');
+       echo date('H:i:s');
+       echo "<p>my name is sergio</p>";
+       echo "<p>my name is sergio</p>";
     }
 }catch(\Throwable $th){
 

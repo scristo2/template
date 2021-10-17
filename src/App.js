@@ -67,10 +67,30 @@ export class App{
     async afterGetPrincipalCode(){
 
         $('#root').append("<div class='App-loading'><img class='imgLoading' src='/src/images/loading.gif' alt='image'><p>Developed by Sergio Cristobal</p></div>");
-
+        var pathSameHiddenMenu = './src/principal/menu/'; 
         var resultPrincipalPage = await this.getPagesCode('./src/principal/index.html', 10, 10);//principal
-        var resultPrincipalMenu = await this.getPagesCode('./src/principal//menu/index.html', 10, 10);//menu hidden
-        return {getResultPrincipalPage : resultPrincipalPage, getResultPrincipalMenu : resultPrincipalMenu};
+        var resultPrincipalMenu = await this.getPagesCode('./src/principal/menu/index.php', 10, 10);//menu hidden
+        var resultPrincipalMenuAds = await this.getPagesCode( pathSameHiddenMenu +'ads/index.php?cache=12', 10, 10);//menu hidden ads
+        var resultPrincipalMenuBanned = await this.getPagesCode(pathSameHiddenMenu + 'banned/index.php?cache=13', 10, 10); //menu hidden banned
+        var resultPrincipalMenuContact = await this.getPagesCode(pathSameHiddenMenu + 'contact/index.php?cache=14', 10, 10); //menu hidden contact
+        var resultPrincipalMenuForum = await this.getPagesCode(pathSameHiddenMenu + '/forum/index.php?=cache=15', 10, 10);//menu hidden forum
+        var resultPrincipalMenuLogIn = await this.getPagesCode('/src/principal/menu/login/index.php?cache=15', 10, 10) //menu hidden login
+        var resultPrincipalMenuRegister = await this.getPagesCode(pathSameHiddenMenu + 'register/index.php?cache=230', 10, 10); //menu  hidden register
+        var resultPrincipalMenuRunes = await this.getPagesCode(pathSameHiddenMenu + 'runes/index.php?cache=16', 10, 10); // menu hidden runes
+        var resultPrincipalMenuSearchGame = await this.getPagesCode(pathSameHiddenMenu + 'searchGame/index.php?cache=17', 10, 10); //menu hidden searchGame
+        return {
+            getResultPrincipalPage : resultPrincipalPage, 
+            getResultPrincipalMenu : resultPrincipalMenu,
+            getResultPrincipalMenuAds : resultPrincipalMenuAds,
+            getResultPrincipalMenuBanned : resultPrincipalMenuBanned,
+            getResultPrincipalMenuContact : resultPrincipalMenuContact,
+            getResultPrincipalMenuForum : resultPrincipalMenuForum,
+            getResultPrincipalMenuLogIn : resultPrincipalMenuLogIn,
+            getResultPrincipalMenuRegister : resultPrincipalMenuRegister,
+            getResultPrincipalMenuRunes : resultPrincipalMenuRunes,
+            getResultPrincipalMenuSearchGame : resultPrincipalMenuSearchGame
+    
+        };
     }
 
 
@@ -83,7 +103,17 @@ export class App{
                $('.App-loading').remove();
                $('#root').append(resolve['getResultPrincipalPage']);
                $('.App-menu').append(resolve['getResultPrincipalMenu']);
-               $('.App-content-temporal').append('<h1>Loading.....</h1>');
+               ///app content temporal  hidden div less principal chat
+               $('.App-content-temporal-chat').append("<div id='App-content-temporaL-loading'><img id='imgLoadingChat' src='/src/images/loading.gif' width='100px' height='100px' alt='image'></div>");
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuAds']);//2º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuBanned']);//3º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuContact']);//4º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuForum']);//5º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuLogIn']);//6º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuRegister']);//7º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuRunes']);//8º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuSearchGame']);//9º
+
                
             }, 
              function(reject){
