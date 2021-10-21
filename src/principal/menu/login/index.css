@@ -1,7 +1,6 @@
 .App-content-temporal-login{
 
-    /**/
-    
+    display: flex;
 }
 
 
@@ -12,6 +11,97 @@
     margin-left: 2vmin;
     font-family: cursive;
    
+}
+
+
+.App-content-temporal-login-formDiv{
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vmin;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.App-content-temporal-login-form{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 2vmin;
+}
+
+
+.App-content-temporal-login-form-input{
+
+       width: 100%;
+}
+
+
+
+.insideFormLogin{
+
+    margin-top: 5vmin;
+}
+
+
+.insideFormLogin2{
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.App-content-temporal-login-form-input{
+
+
+    height: 32px;
+    width: 98%;
+    border: 1px solid grey;
+
+}
+
+
+.insideFormLogin:last-child{
+
+    margin-bottom: 5vmin;
+}
+
+
+
+.App-content-temporal-login-form-input-divCheck{
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media screen and (min-width: 400px) {
+
+    .App-content-temporal-login-form{
+
+        width: 60%;
+    } 
+    
+}
+
+
+
+
+@media screen and (min-width: 700px) {
+
+    .App-content-temporal-login-form{
+
+        width: 30%;
+    } 
+    
 }
 
 

@@ -26,3 +26,24 @@
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
   }
 
+
+
+  input[type=checkbox]{
+
+    cursor: pointer;
+}
+
+
+input{
+
+  cursor: pointer;
+  font-size: 16px;
+  outline: none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+  font-size: 16px;
+
+}
+  
