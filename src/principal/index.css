@@ -221,10 +221,10 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    background: #C6FFDD;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-gradient(linear, left top, right top, from(#f7797d), color-stop(#FBD786), to(#C6FFDD));
-background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: #C6FFDD;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 
    
 }
 
@@ -271,13 +271,14 @@ background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+
     border-bottom: 1px solid white;
     box-sizing: border-box;
     overflow-y: scroll;
+    flex-direction: column;
+    display: none;
 }
 
 
-.App-content-temporal-chat{
+.App-content-temporal-login{
 
-    flex-direction: column;
-    display: none;
+    display: flex;
 }
 
 

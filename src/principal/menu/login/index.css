@@ -1,14 +1,10 @@
 .App-content-temporal-login{
 
-    display: flex;
-    background-color: #DEFFFC;
-    flex-direction: column;
+    /**/
+    
 }
 
-.App-content-temporal-login:last-of-type{
 
-    color: red;
-}
 
 
 .App-content-temporal-login-title > *{

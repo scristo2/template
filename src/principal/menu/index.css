@@ -10,11 +10,7 @@
 /*delete this because is for watch the edit items menu pages**/
 
 
-.App-content-temporal-ads, .App-content-temporal-banned, .App-content-temporal-contact, .App-content-temporal-forum, .App-content-temporal-register,
-.App-content-temporal-runes, .App-content-temporal-searchGame{
 
-    display: none;
-}
 
 
 
@@ -34,6 +30,7 @@
     -ms-flex-align: center;
     align-items: center;
     cursor: pointer;
+    background: inherit;
 }
 
 .App-menu-elements:not(:first-child){
@@ -63,6 +60,7 @@
     -webkit-filter: brightness(1.1);
     filter: brightness(1.1);
     mix-blend-mode: multiply;
+    
 }
 
 .App-menu-elements-text{
