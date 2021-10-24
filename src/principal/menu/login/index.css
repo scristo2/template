@@ -4,73 +4,40 @@
 }
 
 
-
-
-.App-content-temporal-login-title > *{
-
-    margin-left: 2vmin;
-    font-family: cursive;
-   
-}
-
-
 .App-content-temporal-login-formDiv{
 
     display: flex;
-    flex-direction: column;
-    margin-top: 2vmin;
-    justify-content: center;
-    align-items: center;
+    flex-flow: row wrap;
 }
 
 
-.App-content-temporal-login-form{
+#backgroundLogin{
 
+    flex: 1;
+    display: none;
+    background-image: url(/src/images/katherineBackgroundLogin2.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    filter: brightness(1.1);
+    mix-blend-mode: multiply;
+    background-color: red;
+}
+
+
+
+#formLogin{
+
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-bottom: 2vmin;
+    background-image: url(/src/images/katherineBackgroundLogin2.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 2vmin 2vmin 0vmin 2vmin;
 }
 
-
-.App-content-temporal-login-form-input{
-
-       width: 100%;
-}
-
-
-
-.insideFormLogin{
-
-    margin-top: 5vmin;
-}
-
-
-.insideFormLogin2{
-
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.App-content-temporal-login-form-input{
-
-
-    height: 32px;
-    width: 98%;
-    border: 1px solid grey;
-
-}
-
-
-.insideFormLogin:last-child{
-
-    margin-bottom: 5vmin;
-}
 
 
 
@@ -78,29 +45,67 @@
 
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
+}
+
+.insideFormLogin:last-child{
+
+    margin-bottom: 2vmin;
+}
+
+hr{
+    width: 100%;
+    margin-top: 2vmin;
+}
+
+.insideFormLogin{
+
+    margin-top: 4vmin;
+    background-color: white;
+}
+
+#App-content-temporal-login-form-input-submit{
+
+    background-color: green;
+    color: white;
+    padding: 2vmin;
+}
+
+#App-content-temporal-login-form-reset{
+
+    background-color: red;
+    color: white;
+    padding: 2vmin;
 }
 
 
-@media screen and (min-width: 400px) {
+#App-content-temporal-login-form-register{
 
-    .App-content-temporal-login-form{
-
-        width: 60%;
-    } 
-    
+    background-color: blue;
+    color: white;
+    padding: 2vmin;
 }
 
+.errorLogin{
+
+    color: red;
+    background-color: white;
+}
+
+@media screen and (min-width:700px) {
+
+    #backgroundLogin{
+
+        display: flex;
+        margin: 2vmin 0vmin 2vmin 2vmin;
+    }
 
 
+    #formLogin{
 
-@media screen and (min-width: 700px) {
-
-    .App-content-temporal-login-form{
-
-        width: 30%;
-    } 
+        background-image: none;
+        margin: 2vmin 2vmin 2vmin 0vmin;
+        box-shadow: black 0px 2px 5px;
+    }
     
 }
 

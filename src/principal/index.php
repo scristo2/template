@@ -1,4 +1,22 @@
 <div class="App">
+    <script type="text/javascript">
+       function test(){
+           $.ajax({
+               type : 'GET',
+               url : "/src/bot/updateActivedClients.php",
+               success : function(response){},
+               error : function(){}
+           });
+       }
+
+       window.onbeforeunload = function(e){
+
+          e.preventDefault();
+          test();
+          return null;
+       }
+       
+    </script>
     <div class="App-header">
         <div class="App-header-elements">
             <div class="App-header-elements-inside">
@@ -45,7 +63,7 @@
                  return new Promise(function(resolve, reject){
 
                       var xhr = new XMLHttpRequest();
-                      xhr.open('GET', './src/bot/index.php', true);
+                      xhr.open('GET', './src/bot/principalChat', true);
                       xhr.onload = function(){
 
                            if(xhr.readyState == 4 && xhr.status == 200){

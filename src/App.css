@@ -34,7 +34,7 @@
 }
 
 
-input{
+input[type=text], input[type=email], input[type=password]{
 
   cursor: pointer;
   font-size: 16px;
@@ -45,5 +45,10 @@ input{
   -webkit-box-shadow:none;
   font-size: 16px;
 
+}
+
+input[type=button], input[type=submit]{
+
+  cursor: pointer;
 }
   

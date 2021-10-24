@@ -68,8 +68,8 @@ export class App{
 
         $('#root').append("<div class='App-loading'><img class='imgLoading' src='/src/images/loading.gif' alt='image'><p>Developed by Sergio Cristobal</p></div>");
         var pathSameHiddenMenu = './src/principal/menu/'; 
-        var resultPrincipalPage = await this.getPagesCode('./src/principal/index.html', 10, 10);//principal
-        var resultPrincipalMenu = await this.getPagesCode('./src/principal/menu/index.php', 10, 10);//menu hidden
+        var resultPrincipalPage = await this.getPagesCode('./src/principal/index.php?cache=12', 10, 10);//principal
+        var resultPrincipalMenu = await this.getPagesCode('./src/principal/menu/index.php?cache=345', 10, 10);//menu hidden
         var resultPrincipalMenuAds = await this.getPagesCode( pathSameHiddenMenu +'ads/index.php?cache=12', 10, 10);//menu hidden ads
         var resultPrincipalMenuBanned = await this.getPagesCode(pathSameHiddenMenu + 'banned/index.php?cache=13', 10, 10); //menu hidden banned
         var resultPrincipalMenuContact = await this.getPagesCode(pathSameHiddenMenu + 'contact/index.php?cache=14', 10, 10); //menu hidden contact
