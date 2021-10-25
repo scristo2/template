@@ -30,6 +30,7 @@
 
 
 
+
 .App-content-temporal-login-form{
 
     flex: 1;
@@ -54,6 +55,7 @@
 #formLoginReset{
 
     display: none;
+    background-image: url(/src/images/maestroYiBackgroundReset.jpg);
 }
 
 
@@ -79,6 +81,20 @@ hr{
 
     margin-top: 4vmin;
     background-color: white;
+    box-shadow: black 0px 2px 5px;
+}
+
+.titleInsideformLogin{
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #1f4037;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #99f2c8, #1f4037);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    text-decoration: underline;
 }
 
 #App-content-temporal-login-form-input-submit{
@@ -96,7 +112,7 @@ hr{
 }
 
 
-#App-content-temporal-login-form-register{
+#App-content-temporal-login-form-register, #App-content-temporal-login-form-reset-input-submit{
 
     background-color: blue;
     color: white;

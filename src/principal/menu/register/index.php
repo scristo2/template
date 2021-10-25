@@ -3,7 +3,9 @@
     <div class="App-content-temporal-login-formDiv">
         <div class="backgroundLogin" id="backgroundRegister"></div>
         <form id="formRegister" class="App-content-temporal-login-form" autocomplete="on">
-
+            
+           <div class="insideFormLogin titleInsideformLogin"><h1>Register</h1></div>
+        
             <input type="email" placeholder="Enter your email" id="emailRegister" name="emailRegister" class="App-content-temporal-login-form-input insideFormLogin" required>
             <p class="errorLogin" id="errorRegisterEmail"></p>
 
