@@ -32,10 +32,12 @@
     margin-top: 8vmin;
 }
 
-.App-menu-elements:last-child{
+.App-menu-elements-last{
 
     margin-bottom: 8vmin;
-}
+    
+ 
+}   
 
 
 .App-menu-elements :hover{

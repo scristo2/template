@@ -21,5 +21,5 @@ $mensaje = "Esto es una prueba 1\r\nA ver si te llega correctamente 2\r\nUn salu
 $mensaje = wordwrap($mensaje, 70, "\r\n");
 
 // Enviamos el email
-mail('sergio_colino_c@hotmail.com', 'Probando la funcion MAIL desde PHP', $mensaje);
+mail('javier235hj@hotmail.com', 'Probando la funcion MAIL desde PHP', $mensaje);
 ?>

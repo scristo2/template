@@ -1,6 +1,7 @@
-<div class="App-content-temporal-divs App-content-temporal-login"> 
+<!---login-->
+<div id="App-content-temporal-login" class="App-content-temporal-divs App-content-temporal-login"> 
     <div class="App-content-temporal-login-formDiv">
-        <div id="backgroundLogin"></div>
+        <div class="backgroundLogin" id="backgroundLogin"></div>
         <form id="formLogin" class="App-content-temporal-login-form" autocomplete="on">
             <div class="insideFormLogin insideFormLogin2"><p>Email:</p></div>
             <input type="email" name="emailLogin" class="App-content-temporal-login-form-input insideFormLogin" required>
@@ -16,6 +17,10 @@
             <hr>
             <input type="button" value="Reset password" class="insideFormLogin"  id="App-content-temporal-login-form-reset">
             <input type="button" value="Create account" class="insideFormLogin"  id="App-content-temporal-login-form-register">
+        </form>
+        <form id="formLoginReset" class="App-content-temporal-login-form" autocomplete="on">
+            <h1 class="insideFormLogin">Reset password</h1>
+            <input type="submit" value="Reset password">
         </form>
     </div>
     <script type="text/javascript">
@@ -40,5 +45,28 @@
              });
 
        });
+
+
+       ///click create account
+       
+       $('#App-content-temporal-login-form-register').on('click', function(){
+
+           var menuHiddenRegister = document.querySelectorAll('.App-menu-elements')[2];
+
+           $(menuHiddenRegister).click();
+       });
+
+       
+       //click reset password
+       $('#App-content-temporal-login-form-reset').on('click', function(){
+
+          //hidden form login
+          $('#formLogin').css({display : 'none'}); 
+          
+          //show form login reset
+
+          $('#formLoginReset').css({display : 'flex'});
+       });
+
     </script>
 </div>

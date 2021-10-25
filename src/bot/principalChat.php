@@ -1,3 +1,3 @@
 <?php
-echo "<p>this is a text</p>";
+echo date("H:i:s");
 ?>

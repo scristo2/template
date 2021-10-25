@@ -1,0 +1,37 @@
+#backgroundRegister{
+
+    background-image: url(/src/images/nidaleeBackgroundRegister2.jpg);
+}
+
+
+#formRegister{
+
+    background-image: url(/src/images/nidaleeBackgroundRegister2.jpg);
+}
+
+
+#App-content-temporal-register-form-input-submit{
+
+    padding: 2vmin;
+    color: white;
+    background-color: blue;
+}
+
+
+#termsRegister{
+
+    font-size: 2vmin;
+}
+
+
+@media screen and (min-width:700px) {
+     
+    .App-content-temporal-login-form{
+
+        background-image: none;
+        margin: 2vmin 2vmin 2vmin 0vmin;
+        box-shadow: black 0px 2px 5px;
+    }
+
+
+}

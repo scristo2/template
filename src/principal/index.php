@@ -9,12 +9,7 @@
            });
        }
 
-       window.onbeforeunload = function(e){
-
-          e.preventDefault();
-          test();
-          return null;
-       }
+       
        
     </script>
     <div class="App-header">
@@ -37,6 +32,20 @@
                     <div class="App-header-elements-inside-div-blockedDivText">
                         <input type="button" value="Log in" class="App-header-elements-inside-div-blockedDivTextP">
                     </div>
+                    <script type="text/javascript">
+                       $('.App-header-elements-inside-div-blockedDivTextP').on('click', function(){
+
+                            var clickLoginElementHeader = document.querySelectorAll('.App-menu-elements')[1];
+                            
+                            if($('#formLoginReset').css('display') === 'flex'){
+
+                                  $('#formLoginReset').css({display : 'none'});
+                                  $('#formLogin').css({display : 'flex'});
+                            }
+
+                            $(clickLoginElementHeader).click();
+                       });
+                    </script>
                 </div>
             </div>
         </div>
@@ -83,9 +92,8 @@
                       xhr.onerror = function(){
 
                          setTimeout(() => {
-                             setInterval(() => {
                                 reject({readyStateError : this.readyState, StatusError : this.status});
-                             }, 10);
+                             
                          }, 10);
                       }
 

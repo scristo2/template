@@ -105,14 +105,14 @@ export class App{
                $('.App-menu').append(resolve['getResultPrincipalMenu']);
                ///app content temporal  hidden div less principal chat
                $('.App-content-temporal-chat').append("<div id='App-content-temporaL-loading'><img id='imgLoadingChat' src='/src/images/loading.gif' width='100px' height='100px' alt='image'></div>");
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuAds']);//2º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuBanned']);//3º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuContact']);//4º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuForum']);//5º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuLogIn']);//6º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuRegister']);//7º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuRunes']);//8º
-               $('.App-content-temporal').append(resolve['getResultPrincipalMenuSearchGame']);//9º
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuLogIn']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuRegister']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuSearchGame']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuBanned']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuRunes']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuForum']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuContact']);
+               $('.App-content-temporal').append(resolve['getResultPrincipalMenuAds']);
 
                
             }, 

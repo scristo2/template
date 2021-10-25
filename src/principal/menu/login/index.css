@@ -11,40 +11,58 @@
 }
 
 
-#backgroundLogin{
+.backgroundLogin{
 
     flex: 1;
     display: none;
-    background-image: url(/src/images/katherineBackgroundLogin2.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     filter: brightness(1.1);
     mix-blend-mode: multiply;
-    background-color: red;
+}
+
+
+#backgroundLogin{
+
+    background-image: url(/src/images/katherineBackgroundLogin2.jpg);
 }
 
 
 
-#formLogin{
+
+.App-content-temporal-login-form{
 
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url(/src/images/katherineBackgroundLogin2.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 2vmin 2vmin 0vmin 2vmin;
+    mix-blend-mode: multiply;
+    filter: brightness(1.1);
 }
 
 
+#formLogin{
+
+    background-image: url(/src/images/katherineBackgroundLogin2.jpg);
+}
+
+
+#formLoginReset{
+
+    display: none;
+}
 
 
 .App-content-temporal-login-form-input-divCheck{
 
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .insideFormLogin:last-child{
@@ -93,16 +111,16 @@ hr{
 
 @media screen and (min-width:700px) {
 
-    #backgroundLogin{
+    .backgroundLogin{
 
         display: flex;
         margin: 2vmin 0vmin 2vmin 2vmin;
     }
 
 
-    #formLogin{
+    .App-content-temporal-login-form{
 
-        background-image: none;
+        background-image: none !important;
         margin: 2vmin 2vmin 2vmin 0vmin;
         box-shadow: black 0px 2px 5px;
     }
