@@ -6,10 +6,10 @@
             <div class="insideFormLogin titleInsideformLogin"><h1>Log In</h1></div>
             <div class="insideFormLogin insideFormLogin2"><p>Email:</p></div>
             <input type="email" name="emailLogin" class="App-content-temporal-login-form-input insideFormLogin" required>
-            <p class="errorLogin"></p>
+            <p id="errorEmailLogin" class="errorLogin"></p>
             <div class="insideFormLogin insideFormLogin2"><p>Password:</p></div>
             <input type="password" name="passwordLogin" minlength="4" required  class="App-content-temporal-login-form-input insideFormLogin">
-            <p class="errorLogin"></p>
+            <p id="errorPasswordLogin" class="errorLogin"></p>
             <div class="App-content-temporal-login-form-input-divCheck insideFormLogin">
                 <input type="checkbox" name="checkLogin" class="App-content-temporal-login-form-check">
                 <p>Remember sesion</p>
@@ -35,7 +35,7 @@
 
                   var xhr = new XMLHttpRequest();
                   xhr.open('POST', url, true);
-                  xhr.timeout = 2000;
+                  xhr.timeout = 3000;
                   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                   xhr.onload = function(){
 
@@ -74,6 +74,7 @@
        
        async function afterGetAnswerForm(url, form, timeout){
             
+            $('#root').append("<div class='divCenterLoad'></div>")
             var result = await getAnswerForm(url, form, timeout);
             return result;
        }
@@ -83,6 +84,7 @@
              e.preventDefault();
  
              afterGetAnswerForm("/src/bot/login.php", $(this), 10).then(function(resolve){
+                 $('.divCenterLoad').remove();
                  alert(resolve);
              }, function(reject){
                  alert(reject['responseErrorStatus'] + '/ ' + reject['responseErrorReadyState']);
