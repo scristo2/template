@@ -1,5 +1,6 @@
 @import url(/src/principal/index.css?/cache=1020);
 @import url(/src/loading/index.css?/cache=23044);
+@import url(/src/error/index.css?/cache=1111);
 
 .App{
     position: fixed;

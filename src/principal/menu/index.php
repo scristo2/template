@@ -15,6 +15,10 @@
     <p class="App-menu-elements-text">Game</p>
 </div>
 <div class="App-menu-elements">
+    <img src="/src/images/theBest.png" alt="Image" class="App-menu-elements-img">
+    <p class="App-menu-elements-text">The Best</p>
+</div>
+<div class="App-menu-elements">
     <img src="/src/images/bannedLogo.png" alt="Image" class="App-menu-elements-img">
     <p class="App-menu-elements-text">Banned</p>
 </div>

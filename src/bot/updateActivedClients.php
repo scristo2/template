@@ -1,25 +1,63 @@
 <?php 
-function getIpClient(){
+error_reporting(0);
+require $_SERVER['DOCUMENT_ROOT'] . "/src/bot/Bot.php";
+use robot\Robot;
 
-    $ip = null;
+$hostname = "localhost";
+$usernameHostname = 'root';
+$passwordHostname = "";
+$databaseName = "website";
 
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
 
-    return $ip;
+try{
+    
+
+     $conn = new mysqli($hostname, $usernameHostname, $passwordHostname, $databaseName);
+
+     if($conn->connect_errno){
+
+         throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido conectar en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
+        "\n por el siguiente motivo\n" . $conn->connect_error);
+     
+     }else{
+
+          $sql = "CREATE TABLE IF NOT EXISTS `activedClients` (`id` INT(9) AUTO_INCREMENT NOT NULL, `ip` VARCHAR(65) NOT NULL, PRIMARY KEY (`id`))";
+
+          $query = $conn->query($sql);
+
+          if(!$query){
+
+            throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se h apodio crear la tabla en la base de datos en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
+            "\n por el siguiente motivo\n" . $conn->error);
+          
+         }else{
+
+             $queryIp = Robot::getIpClient();
+
+             $sql = "INSERT INTO `activedClients` (`id`, `ip`) VALUES (NULL, '$queryIp')";
+
+             $query = $conn->query($sql);
+
+             
+             if(!$query){
+
+                throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido insertar en la base d edatos en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
+                "\n por el siguiente motivo\n" . $conn->connect_error);
+            
+            }else{
+
+                 echo "datos insertados correctamente";
+            }
+         }
+     }
+    
+}catch(\Throwable $th){
+     
+     error_log($th->getMessage() ."\r\n", 1, "javier235hj@hotmail.com", "Subject: Error en la actualizacion del los clientes en activo.");
+     http_response_code(503); //forze error because the client can not  connect with the database
+
+}finally{
+
+     $conn->close();
+    
 }
-
-
-$mensaje = "Esto es una prueba 1\r\nA ver si te llega correctamente 2\r\nUn saludo 3\r\n\n\n\nwww.ejemplocodigo.com";
-
-// Si cualquier línea es más larga de 70 caracteres, se debería usar wordwrap()
-$mensaje = wordwrap($mensaje, 70, "\r\n");
-
-// Enviamos el email
-mail('javier235hj@hotmail.com', 'Probando la funcion MAIL desde PHP', $mensaje);
-?>
