@@ -1,3 +1,8 @@
 import { App } from "./App.js";
 
-var app = new App();
+$(document).ready(function(){
+
+    var app = new App();
+    
+    
+});

@@ -1,5 +1,6 @@
 <?php 
 error_reporting(0);
+ignore_user_abort(1);
 require $_SERVER['DOCUMENT_ROOT'] . "/src/bot/Bot.php";
 use robot\Robot;
 
@@ -34,19 +35,32 @@ try{
 
              $queryIp = Robot::getIpClient();
 
-             $sql = "INSERT INTO `activedClients` (`id`, `ip`) VALUES (NULL, '$queryIp')";
+             $sql = "SELECT * FROM  `activedClients` WHERE `ip`='$queryIp'";
 
              $query = $conn->query($sql);
 
              
              if(!$query){
 
-                throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido insertar en la base d edatos en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
-                "\n por el siguiente motivo\n" . $conn->connect_error);
+                throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido consultar si la ip esta en la base de datos  en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
+                "\n por el siguiente motivo\n" . $conn->error);
             
             }else{
 
-                 echo "datos insertados correctamente";
+
+                 if($query->num_rows < 1){
+
+                     $sql = "INSERT INTO `activedClients` (`id`, `ip`) VALUES (NULL, '$queryIp')";
+
+                     $query = $conn->query($sql);
+
+
+                     if(!$query){
+
+                         throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido insertar los datos  en la base de datos  en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
+                         "\n por el siguiente motivo\n" . $conn->error);
+                     }
+                 }
             }
          }
      }

@@ -2,7 +2,8 @@
 namespace robot;
 
 class Robot{
-
+   
+   static $errorEmail = "javier235hj@hotmail.com";
 
    static function getIpClient(){
 
@@ -39,5 +40,9 @@ class Robot{
 
         return $result;
     }
+
+
+
+    
 }
 

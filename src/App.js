@@ -13,41 +13,20 @@ export class App{
 
     //close or reload browser
 
-     funcCloseOrReloadBrowser(){
+       funcOpenOrCloseOrReloadBrowser(){
 
 
-             var xhr = new XMLHttpRequest();
-             xhr.open('GET', '/src/bot/deleteActivatedClients.php?cache=456', true);
-             xhr.timeout = 3000;
-             xhr.onload = function(){
+        window.addEventListener('visibilitychange', function(){
 
-                 if(xhr.readyState == 4 && xhr.status == 200){
+            if(document.visibilityState !== 'visible'){
 
-                      console.log('ok');
-                 
-                }else{
-
-                     console.log('xxxxxxxxxxxxx');
-                }
-             }
-
+               navigator.sendBeacon('./src/bot/deleteActivedClients.php?cache=345', null);
             
-            xhr.ontimeout = function(){console.log('xxxxxxxxxx')};
-            
-            xhr.onerror = function(){console.log('xxxxxx')};
+            }else{
 
-            xhr.send(null);
-    }
-
-
-
-    closeOrReloadBrowser(funcClose){
-
-
-        window.onunload =  window.onbeforeunload = function(){
-
-             funcClose();
-         }
+                navigator.sendBeacon('./src/bot/updateActivedClients.php?cache=345', null);
+            }
+       });
     }
 
 
@@ -144,6 +123,7 @@ export class App{
         //backend
 
         var resultUpdateClientsActived = await this.getPagesCode("/src/bot/updateActivedClients.php?cache=456", 10, 3000);
+
         //frot-end
         var resultPrincipalPage = await this.getPagesCode('./src/principal/index.php?cache=12', 10, 3000);//principal
         var resultPrincipalMenu = await this.getPagesCode('./src/principal/menu/index.php?cache=345', 10, 3000);//menu hidden
@@ -183,7 +163,7 @@ export class App{
          this.afterGetPrincipalCode().then(function(resolve){ 
                
                $('.App-loading').remove();
-               console.log(resolve['getResultActivedClients']);
+               //console.log(resolve['getResultActivedClients']);
                $('#root').append(resolve['getResultPrincipalPage']);
                $('.App-menu').append(resolve['getResultPrincipalMenu']);
                ///app content temporal  hidden div less principal chat
@@ -214,7 +194,7 @@ export class App{
                  changeUrl('Load error page', 'An ocurred an error', '?query=errorpage');
                  document.title = "An error ocurred";
         
-            }).then(this.closeOrReloadBrowser(this.funcCloseOrReloadBrowser));
+            }).then(this.funcOpenOrCloseOrReloadBrowser());
     }
 
     
