@@ -74,7 +74,7 @@
        
        async function afterGetAnswerForm(url, form, timeout){
             
-            $('#root').append("<div class='divCenterLoad'></div>")
+            $('#root').append("<div class='divCenterLoad'></div>");
             var result = await getAnswerForm(url, form, timeout);
             return result;
        }
@@ -83,10 +83,11 @@
             
              e.preventDefault();
  
-             afterGetAnswerForm("/src/bot/login.php", $(this), 10).then(function(resolve){
+             afterGetAnswerForm("/src/bot/losgin.php", $(this), 2000).then(function(resolve){
                  $('.divCenterLoad').remove();
                  alert(resolve);
              }, function(reject){
+                $('.divCenterLoad').remove();
                  alert(reject['responseErrorStatus'] + '/ ' + reject['responseErrorReadyState']);
              })
 

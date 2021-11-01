@@ -1,16 +1,5 @@
 <div class="App">
     <script type="text/javascript">
-       function test(){
-           $.ajax({
-               type : 'GET',
-               url : "/src/bot/updateActivedClients.php",
-               success : function(response){},
-               error : function(){}
-           });
-       }
-
-       
-       
     </script>
     <div class="App-header">
         <div class="App-header-elements">

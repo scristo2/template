@@ -5,15 +5,11 @@ require $_SERVER['DOCUMENT_ROOT'] . "/src/bot/Bot.php";
 
 use robot\Robot;
 
-$hostname = "localhost";
-$usernameHostname = 'root';
-$passwordHostname = "";
-$databaseName = "website";
 $ipClient = Robot::getIpClient();
 
 try{
 
-     $conn = new mysqli($hostname, $usernameHostname, $passwordHostname, $databaseName);
+     $conn = new mysqli(Robot::$hostname, Robot::$usernameHostname, Robot::$passwordHostname, Robot::$databaseName);
 
      if($conn->connect_error){
 
@@ -46,8 +42,21 @@ try{
                          throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido borrar en la base de datos en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
                          "\n por el siguiente motivo\n" . $conn->error);
                     
+                    }else{
+
+                          
+                          $sql = "ALTER TABLE `activedClients` AUTO_INCREMENT = 1";
+
+                          $query = $conn->query($sql);
+
+                          if(!$query){
+
+                              throw new Exception("El usuario con la IP\n" . Robot::getIpClient() . "\n no se ha podido restablecer el id en la base de datos en la fecha\n" . Robot::getTime()['dateCompleteHour'] . 
+                             "\n por el siguiente motivo\n" . $conn->error);
+                          }
                     }
-               
+
+             
                }
           }
 

@@ -4,16 +4,12 @@ ignore_user_abort(1);
 require $_SERVER['DOCUMENT_ROOT'] . "/src/bot/Bot.php";
 use robot\Robot;
 
-$hostname = "localhost";
-$usernameHostname = 'root';
-$passwordHostname = "";
-$databaseName = "website";
 
 
 try{
     
 
-     $conn = new mysqli($hostname, $usernameHostname, $passwordHostname, $databaseName);
+     $conn = new mysqli(Robot::$hostname, Robot::$usernameHostname, Robot::$passwordHostname, Robot::$databaseName);
 
      if($conn->connect_errno){
 

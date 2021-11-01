@@ -3,7 +3,7 @@ export class App{
     constructor(){
           
          this.addStyle();
-         this.insertPrincipalCode(this.changeUrl);
+         this.insertPrincipalCode(this.changeUrl, this.funcOpenOrCloseOrReloadBrowser);
          this.ifAnOcurredAnErrorUrl();//change default url
          
     }   
@@ -13,7 +13,7 @@ export class App{
 
     //close or reload browser
 
-       funcOpenOrCloseOrReloadBrowser(){
+    funcOpenOrCloseOrReloadBrowser(){
 
 
         window.addEventListener('visibilitychange', function(){
@@ -117,6 +117,7 @@ export class App{
     async afterGetPrincipalCode(){
 
         $('#root').append("<div class='App-loading'><img class='imgLoading' src='/src/images/loading.gif' alt='image'><p>Developed by Sergio Cristobal</p></div>");
+
         var pathSameHiddenMenu = './src/principal/menu/';
 
         
@@ -126,6 +127,7 @@ export class App{
 
         //frot-end
         var resultPrincipalPage = await this.getPagesCode('./src/principal/index.php?cache=12', 10, 3000);//principal
+        var resultDivCenter = await this.getPagesCode('./src/principal/divCenter/index.php?=cache=567', 10, 3000);//div center
         var resultPrincipalMenu = await this.getPagesCode('./src/principal/menu/index.php?cache=345', 10, 3000);//menu hidden
         var resultPrincipalMenuAds = await this.getPagesCode( pathSameHiddenMenu +'ads/index.php?cache=12', 10, 3000);//menu hidden ads
         var resultPrincipalMenuBanned = await this.getPagesCode(pathSameHiddenMenu + 'banned/index.php?cache=13', 10, 3000); //menu hidden banned
@@ -140,7 +142,8 @@ export class App{
 
             getResultActivedClients : resultUpdateClientsActived,
             ///---------------------------------front-end
-            getResultPrincipalPage : resultPrincipalPage, 
+            getResultPrincipalPage : resultPrincipalPage,
+            getResultDivCenter : resultDivCenter, 
             getResultPrincipalMenu : resultPrincipalMenu,
             getResultPrincipalMenuAds : resultPrincipalMenuAds,
             getResultPrincipalMenuBanned : resultPrincipalMenuBanned,
@@ -157,7 +160,7 @@ export class App{
 
 
 
-    insertPrincipalCode(changeUrl){
+    insertPrincipalCode(changeUrl, funcOpenOrCloseOrReloadBrowser){
 
 
          this.afterGetPrincipalCode().then(function(resolve){ 
@@ -165,6 +168,7 @@ export class App{
                $('.App-loading').remove();
                //console.log(resolve['getResultActivedClients']);
                $('#root').append(resolve['getResultPrincipalPage']);
+               $('#root').append(resolve['getResultDivCenter']);//add to root div center
                $('.App-menu').append(resolve['getResultPrincipalMenu']);
                ///app content temporal  hidden div less principal chat
                $('.App-content-temporal-chat').append("<div id='App-content-temporaL-loading'><img id='imgLoadingChat' src='/src/images/loading.gif' width='100px' height='100px' alt='image'></div>");
@@ -194,7 +198,11 @@ export class App{
                  changeUrl('Load error page', 'An ocurred an error', '?query=errorpage');
                  document.title = "An error ocurred";
         
-            }).then(this.funcOpenOrCloseOrReloadBrowser());
+            }).then(function(){
+
+                funcOpenOrCloseOrReloadBrowser();
+                
+            });
     }
 
     

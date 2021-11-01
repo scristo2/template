@@ -4,6 +4,10 @@ namespace robot;
 class Robot{
    
    static $errorEmail = "javier235hj@hotmail.com";
+   static $hostname = "localhost";
+   static $usernameHostname = 'root';
+   static $passwordHostname = "";
+   static $databaseName = "website";
 
    static function getIpClient(){
 

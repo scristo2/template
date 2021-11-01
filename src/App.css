@@ -1,6 +1,17 @@
 @import url(/src/principal/index.css?/cache=1020);
 @import url(/src/loading/index.css?/cache=23044);
 @import url(/src/error/index.css?/cache=1111);
+@import url(/src/principal/divCenter/index.css?/cache=345);
+
+#root{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
 
 .App{
     position: fixed;
@@ -55,19 +66,5 @@ input[type=button], input[type=submit]{
 }
 
 
-.divCenterLoad{
 
-  position: absolute;
-  width: 30vmin;
-  height: 30vmin;
-  background-color: black;
-  left: calc(50% - 15vmin);
-  top: calc(50% - 15vmin);
-  z-index: 1;
-  background-image: url(/src/images/loading.gif);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  filter: brightness(1.1);
-  mix-blend-mode: multiply;
-}
   

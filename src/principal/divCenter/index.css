@@ -1,0 +1,63 @@
+.divCenter{
+
+    position: absolute;
+    min-width: 30vmin;
+    height: 30vmin;
+    background-color: white;
+    z-index: 1;
+    background-image: url(/src/images/loading.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    filter: brightness(1.1);
+    mix-blend-mode: normal;
+    box-shadow: 0px 2px 5px black;
+    border: 1px solid black;
+    padding: 1em;
+    display: none;
+    flex-direction: column;
+  }
+
+  .insideDivCenter{
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+  }
+
+  #insideDivCenter{
+
+     height: 100%;
+    
+  }
+
+
+  #insideDivCenterClose{
+    
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 1vmin;
+  }
+
+  .closeWindowImg{
+
+   filter: brightness(1.1);
+   width: 8vmin;
+   height: 8vmin;
+   cursor: pointer;
+ }
+
+  .insideDivCenterImg{
+
+     width: 10vmin;
+     height: 10vmin;
+  }
+
+  .insideDivCenterText{
+
+    margin-left: 1vmin;
+  }
+
+
+  
