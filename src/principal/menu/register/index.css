@@ -24,6 +24,40 @@
 }
 
 
+#insideFormLoginPasswordDiv{
+
+     display: flex;
+     flex-flow: row wrap;
+     justify-content: center;
+     align-items: center;
+     box-shadow: 0px 2px 5px black;
+     width: 50%;
+    
+}
+
+.App-content-temporal-login-form-input{
+
+    width: 50%;
+}
+
+
+.eyePassword{
+
+     width: 10vmin;
+     height: 32px;
+     cursor: pointer;
+     filter: brightness(1.1);
+     mix-blend-mode: multiply;
+     
+}
+
+#password1Register{
+
+     border: none;
+     flex: 1;
+}
+
+
 @media screen and (min-width:700px) {
      
     .App-content-temporal-login-form{
@@ -32,6 +66,16 @@
         margin: 2vmin 2vmin 2vmin 0vmin;
         box-shadow: black 0px 2px 5px;
     }
+
+
+    .eyePassword{
+
+        width: 6vmin;
+        
+    }
+
+
+    
 
 
 }

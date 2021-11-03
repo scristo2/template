@@ -7,16 +7,18 @@
            <div class="insideFormLogin titleInsideformLogin"><h1>Register</h1></div>
         
             <input type="email" placeholder="Enter your email" id="emailRegister" name="emailRegister" class="App-content-temporal-login-form-input insideFormLogin" required>
-            <p class="errorLogin" id="errorRegisterEmail"></p>
+           
 
             <input type="text" placeholder="Enter a username" minlength="4" maxlength="10" id="usernameRegister" name="usernameRegister" class="App-content-temporal-login-form-input insideFormLogin" required>
-            <p class="errorLogin" id="errorRegisterUsername"></p>
+          
 
-            <input type="password" id="password1Register" placeholder="Enter a password" name="passwordRegister1" minlength="4" required  class="App-content-temporal-login-form-input insideFormLogin">
-            <p class="errorLogin" id="errorRegisterPassword1"></p>
+            <div id="insideFormLoginPasswordDiv" class="insideFormLogin">
+                <input type="password" id="password1Register" placeholder="Enter a password" name="passwordRegister1" minlength="4" required  class="App-content-temporal-login-form-input">
+                <img src="./src/images/showPassword.png" alt="Click here show password" class="eyePassword">
+            </div>
+            
 
             <input type="password" placeholder="Enter again your password" id="password2Register" name="passwordRegister2" minlength="4" required  class="App-content-temporal-login-form-input insideFormLogin">
-            <p class="errorLogin" id="errorRegisterPassword2"></p>
 
             <div class="App-content-temporal-login-form-input-divCheck insideFormLogin">
                 <input id="checkRegister" type="checkbox" name="checkRegister" required class="App-content-temporal-login-form-check">
@@ -32,6 +34,27 @@
         </form>
     </div>
     <script type="text/javascript">
+
+        $('.eyePassword').on('click', function(){
+
+             if($(this).prop('src').toString().includes('dont')){
+
+                   $('#password1Register').prop('type', 'password');
+                   $('#password2Register').prop('type', 'password');
+                   $(this).prop('src', './src/images/showPassword.png');
+                   
+            
+             }else{
+
+                   $('#password1Register').prop('type', 'text');
+                   $('#password2Register').prop('type', 'text');
+                   $(this).prop('src', './src/images/dontShowPassword.png');
+                  
+             }
+
+
+             
+        });
        
        function getAnswerRegister(form){
 
@@ -68,7 +91,11 @@
                           if(xhr.status !== 200){
 
                               setTimeout(() => {
-                                  reject({'errorReadyState' : xhr.readyState, 'errorStatus' : xhr.status});
+                                  if(xhr.responseText.includes('character') || xhr.responseText.includes('Passwords')){
+                                    reject(xhr.responseText);
+                                  }else{
+                                      reject('An ocurred an error.Please try again!');
+                                  }
                               }, 2000);
                           }
                 }
@@ -79,7 +106,7 @@
                 xhr.ontimeout = function(){
 
                      setTimeout(() => {
-                        reject({'errorReadyState' : xhr.readyState, 'errorStatus' : xhr.status});
+                        reject("The connection time has expired, try again!");
                      }, 2000);
                 }
 
@@ -87,7 +114,7 @@
                 xhr.onerror = function(){
 
                      setTimeout(() => {
-                        reject({'errorReadyState' : xhr.readyState, 'errorStatus' : xhr.status});
+                        reject("An error has occurred, please try again!");
                      }, 2000);
                 }
 
@@ -147,8 +174,31 @@
                 
                 }, function(reject){
                     
-                    alert(reject['errorStatus']);
-                    $('.divCenterLoad').remove(); 
+                     //hidden background login because has show the answer register
+                      $('.divCenter').css({
+
+                           backgroundImage : 'none',
+
+                       });
+
+                     //opacity app because the .divCenter look like better 
+
+                    $('.App').css({'opacity' : '0.5'});
+
+                    //show inside beacuse i need close button and answer register 
+                    $('.insideDivCenter').css({display : 'flex'});
+                    $('#insideDivCenterClose').css({display : 'flex'});
+
+
+                    //add src img in this case is info beacuse is succesfully
+
+                    $('.insideDivCenterImg').prop('src', './src/images/errorDivCenter.png');
+
+                    //and i insert text with the answer
+
+                    $('.insideDivCenterText').text(reject);
+                    
+                    $('#password1Register').prop('type', 'text');
                 });
 
        });
