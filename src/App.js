@@ -82,7 +82,15 @@ export class App{
 
                           setTimeout(() => {
                              
-                                resolve(xhr.responseText);
+                                if(url.toString().indexOf('knowRemember') > -1){
+
+                                      resolve(JSON.parse(xhr.responseText));
+                                      
+                                
+                                }else{
+
+                                     resolve(xhr.responseText);
+                                }
 
                               
                           }, timeout);      
@@ -124,8 +132,9 @@ export class App{
         //backend
 
         var resultUpdateClientsActived = await this.getPagesCode("/src/bot/updateActivedClients.php?cache=456", 10, 3000);
+        var resultKnowRememberSession = await this.getPagesCode("/src/bot/knowRememberSession.php?cache=567", 10, 3000);
 
-        //frot-end
+        //front-end
         var resultPrincipalPage = await this.getPagesCode('./src/principal/index.php?cache=12', 10, 3000);//principal
         var resultDivCenter = await this.getPagesCode('./src/principal/divCenter/index.php?=cache=567', 10, 3000);//div center
         var resultPrincipalMenu = await this.getPagesCode('./src/principal/menu/index.php?cache=345', 10, 3000);//menu hidden
@@ -137,7 +146,8 @@ export class App{
         var resultPrincipalMenuRegister = await this.getPagesCode(pathSameHiddenMenu + 'register/index.php?cache=230', 10, 3000); //menu  hidden register
         var resultPrincipalMenuRunes = await this.getPagesCode(pathSameHiddenMenu + 'runes/index.php?cache=16', 10, 1000); // menu hidden runes
         var resultPrincipalMenuSearchGame = await this.getPagesCode(pathSameHiddenMenu + 'searchGame/index.php?cache=17', 10, 3000); //menu hidden searchGame
-        var resultPrincipalMenuBest = await this.getPagesCode(pathSameHiddenMenu + "/best/index.php?=cache=45", 10, 3000);
+        var resultPrincipalMenuBest = await this.getPagesCode(pathSameHiddenMenu + "/best/index.php?=cache=45", 10, 3000); //menu hidden the best
+        var resultPrincipalMenuMyAccount = await this.getPagesCode(pathSameHiddenMenu + "/account/index.php?cache=456", 10, 3000); //menu hidden my account
         return {
 
             getResultActivedClients : resultUpdateClientsActived,
@@ -153,7 +163,10 @@ export class App{
             getResultPrincipalMenuRegister : resultPrincipalMenuRegister,
             getResultPrincipalMenuRunes : resultPrincipalMenuRunes,
             getResultPrincipalMenuSearchGame : resultPrincipalMenuSearchGame,
-            getResultPrincipalMenuBest : resultPrincipalMenuBest
+            getResultPrincipalMenuBest : resultPrincipalMenuBest,
+            getResultKnowRememberSession : resultKnowRememberSession,
+            getResultPrincipalMenuMyAccount : resultPrincipalMenuMyAccount,
+           
     
         };
     }
@@ -172,6 +185,7 @@ export class App{
                $('.App-menu').append(resolve['getResultPrincipalMenu']);
                ///app content temporal  hidden div less principal chat
                $('.App-content-temporal-chat').append("<div id='App-content-temporaL-loading'><img id='imgLoadingChat' src='/src/images/loading.gif' width='100px' height='100px' alt='image'></div>");
+               //$('.App-content-temporal').append(resolve['getResultPrincipalMenuMyAccount']);
                $('.App-content-temporal').append(resolve['getResultPrincipalMenuLogIn']);
                $('.App-content-temporal').append(resolve['getResultPrincipalMenuRegister']);
                $('.App-content-temporal').append(resolve['getResultPrincipalMenuSearchGame']);
@@ -182,7 +196,24 @@ export class App{
                $('.App-content-temporal').append(resolve['getResultPrincipalMenuContact']);
                $('.App-content-temporal').append(resolve['getResultPrincipalMenuAds']);
                
+               ///-----------
+               $('.App-header-elements-inside-div-blockedDivTextP').val(resolve['getResultKnowRememberSession']['textUsername']);
+               $('.App-header-elements-inside-div-imgBlocked').prop('src', resolve['getResultKnowRememberSession']['pathImageTextUsername']);
 
+               var listItemsMenu = document.querySelectorAll('.App-menu-elements');
+
+               $(listItemsMenu[1]).css({display : resolve['getResultKnowRememberSession']['displayMenuAccount']});
+
+               $(listItemsMenu[2]).css({display : resolve['getResultKnowRememberSession']['displayMenuLogin']});
+
+               $(listItemsMenu[3]).css({display : resolve['getResultKnowRememberSession']['displayMenuRegister']});
+
+               
+               if(resolve['getResultKnowRememberSession']['displayMenuAccount'] === "flex"){
+
+                   $('.App-content-temporal-chat').after(resolve['getResultPrincipalMenuMyAccount']);
+                   $('#App-header-elements-inside-div-imgCloseSession').css({display : 'flex'})
+               } 
                
             }, 
              function(reject){

@@ -62,7 +62,7 @@
 
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', './src/bot/register.php?cache=56');
-                xhr.timeout = 2000;
+                xhr.timeout = 30000; //the eamil delay something,30 second por si acaso and is default time php execution time
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr.onload = function(){
 
@@ -78,7 +78,7 @@
 
                          setTimeout(() => {
                              
-                            reject({'errorReadyState' : xhr.readyState, 'errorStatus' : xhr.status});
+                            reject("An ocurred an error");
 
                          }, 2000);
                      }
@@ -88,16 +88,24 @@
                 xhr.onreadystatechange = function(){
                             
                           
-                          if(xhr.status !== 200){
+                          if(xhr.status !== 200 && xhr.status > 1){ //this > 1 beacuse when i use mail function reaystate change to 0
 
                               setTimeout(() => {
-                                  if(xhr.responseText.includes('character') || xhr.responseText.includes('Passwords')){
-                                    reject(xhr.responseText);
-                                  }else{
-                                      reject('An ocurred an error.Please try again!');
-                                  }
+                                 
+
+                                    if(xhr.responseText.includes('character') || xhr.responseText.includes('Passwords') || xhr.responseText.includes('already registered')){
+                                       
+                                        reject(xhr.responseText);
+
+                                    }else{
+
+                                       reject("An ocurred an error.Try again");
+                                   }
+                                  
                               }, 2000);
-                          }
+                        
+                        
+                        }
                 }
 
 
@@ -198,7 +206,7 @@
 
                     $('.insideDivCenterText').text(reject);
                     
-                    $('#password1Register').prop('type', 'text');
+                    //$('#password1Register').prop('type', 'text');
                 });
 
        });

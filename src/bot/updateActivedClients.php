@@ -68,6 +68,9 @@ try{
 
 }finally{
 
-     $conn->close();
+     if(!$conn->connect_error){
+
+          $conn->close();
+     }
     
 }

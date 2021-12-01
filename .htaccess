@@ -10,6 +10,12 @@ RewriteRule ^(.*)$ $1.php
      </IfModule>
 </IfModule>
 
+#redirigir errores 403,404 a pagina error echa por mi
+
+ErrorDocument 404 http://localhost.com
+
+ErrorDocument 403 http://localhost.com
+
 #no cache ccs or other files
 # DISABLE CACHING
 <IfModule mod_headers.c>

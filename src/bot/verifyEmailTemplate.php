@@ -19,7 +19,6 @@ if(preg_match('/QUERY(.*)/', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], $r
 
      $emailUser = 'Error email';
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +68,7 @@ if(preg_match('/QUERY(.*)/', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], $r
              flex-direction: column;
              justify-content: center;
              align-items: center;
-             background-image: url("../images/gifVerifyEmail.gif");
+             background-image: url("/src/images/gifVerifyEmail.gif");
              background-size: 100% 100%;
              background-repeat: no-repeat;
              filter: brightness(1.1);
@@ -144,7 +143,7 @@ if(preg_match('/QUERY(.*)/', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], $r
 
 
                    var xhr = new XMLHttpRequest();
-                   xhr.open('POST', './verifyEmail.php');
+                   xhr.open('POST', '/src/bot/verifyEmail.php');
                    xhr.timeout = 30000;
                    xhr.onload = function(){
 
@@ -206,7 +205,7 @@ if(preg_match('/QUERY(.*)/', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], $r
 
           afterGetAnswerVerifyEmail().then(function(resolve){
                
-              alert(resolve);
+              document.location.href = "<?php echo Robot::getMyDomain()?>";
               
           }, function(reject){
 
@@ -219,7 +218,7 @@ if(preg_match('/QUERY(.*)/', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], $r
                       
                  });
 
-                 $('.App-header-first').prepend('<img class="img-error" src="../images/errorLoadPage.jpg">')
+                 $('.App-header-first').prepend('<img class="img-error" src="/src/images/errorLoadPage.jpg">')
                  
                  
                  $('hr').css({
@@ -237,15 +236,15 @@ if(preg_match('/QUERY(.*)/', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], $r
                          $('#register').on('click', function(){
                              window.location.href = "<?php echo $protocol . $_SERVER['HTTP_HOST'];?>";
                          });
-                         textButton = "This email is not registered"
+                         textButton = "This email is not registered";
                          break;
                      
-                     case 'Error mysqli': 
+                     default: 
                         $('.App-header').append('<input id="retry" type="button" value="retry">');
                         $('#retry').on('click', function(){
                             window.location.reload();
                         });
-                        textButton = "An error has occurred!";
+                        textButton = reject;
                         break;
                      
                  }

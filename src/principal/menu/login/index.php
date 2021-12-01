@@ -5,13 +5,13 @@
         <form id="formLogin" class="App-content-temporal-login-form" autocomplete="on">
             <div class="insideFormLogin titleInsideformLogin"><h1>Log In</h1></div>
             <div class="insideFormLogin insideFormLogin2"><p>Email:</p></div>
-            <input type="email" name="emailLogin" class="App-content-temporal-login-form-input insideFormLogin" required>
+            <input type="email" id="emailLogin" name="emailLogin" class="App-content-temporal-login-form-input insideFormLogin" required>
             <p id="errorEmailLogin" class="errorLogin"></p>
             <div class="insideFormLogin insideFormLogin2"><p>Password:</p></div>
-            <input type="password" name="passwordLogin" minlength="4" required  class="App-content-temporal-login-form-input insideFormLogin">
+            <input type="password" id="passwordLogin" name="passwordLogin" minlength="4" required  class="App-content-temporal-login-form-input insideFormLogin">
             <p id="errorPasswordLogin" class="errorLogin"></p>
             <div class="App-content-temporal-login-form-input-divCheck insideFormLogin">
-                <input type="checkbox" name="checkLogin" class="App-content-temporal-login-form-check">
+                <input type="checkbox" id="checkLogin" name="checkLogin" class="App-content-temporal-login-form-check">
                 <p>Remember sesion</p>
             </div>
             <input type="submit" class="insideFormLogin" id="App-content-temporal-login-form-input-submit" value="Log In">
@@ -23,11 +23,48 @@
             <div class="insideFormLogin titleInsideformLogin"><h1>Reset password</h1></div>
             <p class="insideFormLogin">Enter your email:</p>
             <input class="insideFormLogin" type="email" required>
-            <p class=" insideFormLogin errorLogin">This email is wrong!</p>
             <input class="insideFormLogin" id="App-content-temporal-login-form-reset-input-submit" type="submit" value="Reset password">
         </form>
     </div>
     <script type="text/javascript">
+       
+       //after login create div account
+       function getCodeMenuAccount(){
+
+          return new Promise(function(resolve, reject){
+
+               var xhr = new XMLHttpRequest();
+               xhr.open('GET', "./src/principal/menu/account/index.php?cache=4589");
+               xhr.timeout = 30000;
+               xhr.onload = function(){
+
+                  if(xhr.readyState == 4 && xhr.status == 200){
+
+                     setTimeout(() => {
+                         resolve(xhr.responseText);
+                     }, 2000);
+                  }
+               }
+
+               xhr.onerror = function(){
+
+                 setTimeout(() => {
+                     reject('An ocurred an error!');
+                 }, 2000);
+               }
+
+               xhr.ontimeout = function(){
+
+                   setTimeout(() => {
+                       reject("The connection time has expired, try again!");
+                    }, timeout);
+                }
+
+
+                xhr.send(null);
+          });
+       }
+
        
        function getAnswerForm(url,form, timeout){
 
@@ -35,35 +72,46 @@
 
                   var xhr = new XMLHttpRequest();
                   xhr.open('POST', url, true);
-                  xhr.timeout = 3000;
+                  xhr.timeout = 30000;
                   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                   xhr.onload = function(){
 
                      if(xhr.readyState == 4 && xhr.status == 200){
 
                          setTimeout(() => {
-                             resolve(xhr.responseText);
+                            resolve(JSON.parse(xhr.responseText));
                          }, timeout);
                      
                     }else{
 
                         setTimeout(() => {
-                            reject({responseErrorStatus : this.status, responseErrorReadyState : this.readyState});
+                            reject("An ocurred an error!");
                         }, timeout);
                     }
+                  }
+
+
+                  xhr.onreadystatechange = function(){
+
+                       if(xhr.status !== 200 && xhr.status > 1){
+
+                           setTimeout(() => {
+                               reject(xhr.responseText);
+                           }, timeout);
+                       }
                   }
 
                   xhr.ontimeout = function(){
 
                      setTimeout(() => {
-                        reject({responseErrorStatus : this.status, responseErrorReadyState : this.readyState});
+                        reject("The connection time has expired, try again!");
                      }, timeout);
                   }
 
                   xhr.onerror = function(){
 
                      setTimeout(() => {
-                        reject({responseErrorStatus : this.status, responseErrorReadyState : this.readyState}); 
+                        reject("An error has occurred, please try again!"); 
                      }, timeout);
                   }
 
@@ -71,25 +119,142 @@
             });
        }
 
-       
+       //only login form
        async function afterGetAnswerForm(url, form, timeout){
             
-            $('#root').append("<div class='divCenterLoad'></div>");
+             //show loading
+           $('.divCenter').css({
+               display : 'flex',
+               backgroundImage : 'url(/src/images/loading.gif)'
+            });
+             //and hidden content from divcenter because is only loading
+           $('.insideDivCenter').css({display : 'none'});
+           $('#insideDivCenterClose').css({display : 'none'});
             var result = await getAnswerForm(url, form, timeout);
-            return result;
+            var result1 = await getCodeMenuAccount();
+            return {
+
+
+                 result,
+                 result1
+            }
+       }
+
+       //for reset password
+
+       async function afterGetAnswerFormResetPassword(url, form, timeout){
+
+             //show loading
+           $('.divCenter').css({
+               display : 'flex',
+               backgroundImage : 'url(/src/images/loading.gif)'
+            });
+             //and hidden content from divcenter because is only loading
+           $('.insideDivCenter').css({display : 'none'});
+           $('#insideDivCenterClose').css({display : 'none'});
+
+           var result = await getAnswerForm(url, form, timeout);
+           return result;
        }
 
        $('#formLogin').submit(function(e){
             
              e.preventDefault();
+             
+             //disabled submit until delete .divCenterLoad
+             $('#App-content-temporal-login-form-input-submit').prop('disabled', true);
  
-             afterGetAnswerForm("/src/bot/losgin.php", $(this), 2000).then(function(resolve){
-                 $('.divCenterLoad').remove();
-                 alert(resolve);
+             afterGetAnswerForm("/src/bot/login.php", $(this), 2000).then(function(resolve){
+                  
+                   //hidden divCenter because succesfully login
+                  $('.divCenter').css({
+                       display : 'none',
+                    });
+
+
+                  $('#App-content-temporal-login-form-input-submit').prop('disabled', false);
+
+
+                  //change text login by username
+                  
+                  $('.App-header-elements-inside-div-blockedDivTextP').val(resolve['result']['username']);
+
+
+                  //change src image login by username image
+
+                  $('.App-header-elements-inside-div-imgBlocked').prop('src', "./src/images/profileMenu.png");
+
+
+                  //hidden menu login and register
+
+                  var listMenuElements = document.querySelectorAll('.App-menu-elements');
+
+                  $(listMenuElements[2]).css({display : 'none'});
+                  $(listMenuElements[3]).css({display : 'none'});
+
+
+                  //show my account menu
+
+                  $(listMenuElements[1]).css({display :'flex'});
+
+
+                  //hidden div login
+
+                  $('#App-content-temporal-login').css({display : 'none'});
+
+
+                  //show my accounnt after login
+
+                  $('.App-content-temporal-chat').after(resolve['result1']); //append account
+
+
+                  $('.App-content-temporal-account').css({display : 'flex'});
+                  
+                  
+                  //show close session next to text username
+                  $('#App-header-elements-inside-div-imgCloseSession').css({display : 'flex'});
+
+
+                  //change url to my account
+
+                  window.history.replaceState({'actions' : 'my account'}, "Make you own team or join to any", "?query=myaccount");
+
+
              }, function(reject){
-                $('.divCenterLoad').remove();
-                 alert(reject['responseErrorStatus'] + '/ ' + reject['responseErrorReadyState']);
-             })
+
+                   //hidden background login because has show the answer register
+                   $('.divCenter').css({
+
+                     backgroundImage : 'none',
+
+                   });
+
+                   //opacity app because the .divCenter look like better 
+
+                   $('.App').css({'opacity' : '0.5'});
+
+                   //show inside beacuse i need close button and answer register 
+
+                   $('.insideDivCenter').css({display : 'flex'});
+                   $('#insideDivCenterClose').css({display : 'flex'});
+
+
+                   //add src img in this case is errot beacuse is not succesfully
+
+                    $('.insideDivCenterImg').prop('src', './src/images/errorDivCenter.png');
+
+                    //and i insert text with the answer
+
+                    $('.insideDivCenterText').text(reject);
+             });
+
+             //uncheked checkLogin
+
+             //$('#checkLogin').prop('checked', false);
+             
+             //empty inputs form login
+             //$('#emailLogin').val('');
+             //$('#passwordLogin').val('');
 
        });
 
@@ -98,17 +263,65 @@
 
              e.preventDefault();
 
-             $.ajax({
+             //disabled button after click
 
-                 type : 'POST',
-                 url : '/src/bot/resetPassword.php',
-                 data : $(this).serialize(),
-                 success: function(response){
-                     alert(response);
-                 },
-                 error : function(){
-                     alert('error form reset');
-                 }
+             $('#App-content-temporal-login-form-reset-input-submit').prop('disabled', true);
+
+             afterGetAnswerFormResetPassword("/src/bot/resetPassword.php?cache=789", $(this), 2000).then(function(resolve){
+
+                  //hidden background login because has show the answer register
+                  $('.divCenter').css({
+
+                   backgroundImage : 'none',
+
+                  });
+
+                  //opacity app because the .divCenter look like better 
+
+                  $('.App').css({'opacity' : '0.5'});
+
+                  //show inside beacuse i need close button and answer register 
+
+                  $('.insideDivCenter').css({display : 'flex'});
+                  $('#insideDivCenterClose').css({display : 'flex'});
+
+
+                  //add src img in this case is info beacuse is succesfully
+
+                  $('.insideDivCenterImg').prop('src', './src/images/info.png');
+
+                  //and i insert text with the answer
+
+                  $('.insideDivCenterText').text(resolve['primero']);
+
+
+             }, function(reject){
+
+                 //hidden background login because has show the answer register
+                 $('.divCenter').css({
+
+                     backgroundImage : 'none',
+
+                 });
+
+                 //opacity app because the .divCenter look like better 
+
+                 $('.App').css({'opacity' : '0.5'});
+
+                 //show inside beacuse i need close button and answer register 
+
+                 $('.insideDivCenter').css({display : 'flex'});
+                 $('#insideDivCenterClose').css({display : 'flex'});
+
+
+                 //add src img in this case is info beacuse is succesfully
+
+                 $('.insideDivCenterImg').prop('src', './src/images/errorDivCenter.png');
+
+                 //and i insert text with the answer
+
+                $('.insideDivCenterText').text(reject);
+
              });
        });
 
@@ -117,9 +330,11 @@
        
        $('#App-content-temporal-login-form-register').on('click', function(){
 
-           var menuHiddenRegister = document.querySelectorAll('.App-menu-elements')[2];
+           var menuHiddenRegister = document.querySelectorAll('.App-menu-elements')[3];
 
            $(menuHiddenRegister).click();
+
+           
        });
 
        
@@ -132,6 +347,8 @@
           //show form login reset
 
           $('#formLoginReset').css({display : 'flex'});
+
+          window.history.replaceState({'actions' : 'Reset password'}, "Make you own team or join to any", "?query=reset&&password");
        });
 
     </script>

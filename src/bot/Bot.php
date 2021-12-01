@@ -8,6 +8,28 @@ class Robot{
    static $usernameHostname = 'root';
    static $passwordHostname = "";
    static $databaseName = "website";
+   static $urlWebsite = "http://localhost"; //the domain
+
+   
+   static function getMyDomain(){
+
+
+        $protocol = null;
+
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
+
+             $protocol = "https://";
+        
+        }else{
+
+            $protocol = "http://";
+        }
+
+
+        return $protocol . $_SERVER['HTTP_HOST'];
+   }
+   
+
 
    static function getIpClient(){
 
