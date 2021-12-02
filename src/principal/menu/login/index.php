@@ -20,9 +20,9 @@
             <input type="button" value="Create account" class="insideFormLogin"  id="App-content-temporal-login-form-register">
         </form>
         <form id="formLoginReset" class="App-content-temporal-login-form" autocomplete="on">
-            <div class="insideFormLogin titleInsideformLogin"><h1>Reset password</h1></div>
-            <p class="insideFormLogin">Enter your email:</p>
-            <input class="insideFormLogin" type="email" required>
+            <div class="insideFormLogin titleInsideformLogin"><h2>Reset password</h2></div>
+            <p class="insideFormLogin">email:</p>
+            <input class="App-content-temporal-login-form-input insideFormLogin" type="email" name="emailReset" required>
             <input class="insideFormLogin" id="App-content-temporal-login-form-reset-input-submit" type="submit" value="Reset password">
         </form>
     </div>
@@ -79,7 +79,11 @@
                      if(xhr.readyState == 4 && xhr.status == 200){
 
                          setTimeout(() => {
-                            resolve(JSON.parse(xhr.responseText));
+                            if(url.toString().includes('login')){
+                                resolve(JSON.parse(xhr.responseText));
+                            }else{
+                                resolve(xhr.responseText);
+                            }
                          }, timeout);
                      
                     }else{
@@ -98,7 +102,8 @@
                            setTimeout(() => {
                                reject(xhr.responseText);
                            }, timeout);
-                       }
+                        
+                        }
                   }
 
                   xhr.ontimeout = function(){
@@ -292,7 +297,7 @@
 
                   //and i insert text with the answer
 
-                  $('.insideDivCenterText').text(resolve['primero']);
+                  $('.insideDivCenterText').text(resolve);
 
 
              }, function(reject){

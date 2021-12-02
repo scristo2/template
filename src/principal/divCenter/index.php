@@ -13,6 +13,7 @@
     </script>
     <div class="insideDivCenter" id="insideDivCenter">
         <img  alt="Image info" class="insideDivCenterImg">
+        <hr>
         <p class="insideDivCenterText"></p>
     </div>
 </div>

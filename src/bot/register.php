@@ -210,7 +210,7 @@ isset($_POST['passwordRegister2']) && isset($_POST['dateRegister']) && isset($_P
                                   <meta charset="UTF-8">
                                   <meta http-equiv="X-UA-Compatible" content="IE=edge">
                                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                  <title>this is a test</title>
+                                  <title>Verify email</title>
                               </head>' . 
                               '<body>' .
                               '<h1>Hello '. $usernameRegister . ':</h1>'.
