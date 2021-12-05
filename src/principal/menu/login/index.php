@@ -23,6 +23,7 @@
             <div class="insideFormLogin titleInsideformLogin"><h2>Reset password</h2></div>
             <p class="insideFormLogin">email:</p>
             <input class="App-content-temporal-login-form-input insideFormLogin" type="email" name="emailReset" required>
+            <hr>
             <input class="insideFormLogin" id="App-content-temporal-login-form-reset-input-submit" type="submit" value="Reset password">
         </form>
     </div>
@@ -272,32 +273,46 @@
 
              $('#App-content-temporal-login-form-reset-input-submit').prop('disabled', true);
 
+
              afterGetAnswerFormResetPassword("/src/bot/resetPassword.php?cache=789", $(this), 2000).then(function(resolve){
 
-                  //hidden background login because has show the answer register
-                  $('.divCenter').css({
+                  if(resolve.toString().includes('succesfully')){
 
-                   backgroundImage : 'none',
+                     //disabled button after click
 
-                  });
-
-                  //opacity app because the .divCenter look like better 
-
-                  $('.App').css({'opacity' : '0.5'});
-
-                  //show inside beacuse i need close button and answer register 
-
-                  $('.insideDivCenter').css({display : 'flex'});
-                  $('#insideDivCenterClose').css({display : 'flex'});
+                     $('#App-content-temporal-login-form-reset-input-submit').prop('disabled', false);
+                     $('#App-content-temporal-login-form-reset-input-submit').click();
 
 
-                  //add src img in this case is info beacuse is succesfully
+                  }else{
 
-                  $('.insideDivCenterImg').prop('src', './src/images/info.png');
+                        
 
-                  //and i insert text with the answer
+                       //hidden background login because has show the answer register
+                       $('.divCenter').css({
 
-                  $('.insideDivCenterText').text(resolve);
+                           backgroundImage : 'none',
+
+                       });
+
+                       //opacity app because the .divCenter look like better 
+
+                       $('.App').css({'opacity' : '0.5'});
+
+                       //show inside beacuse i need close button and answer register 
+
+                         $('.insideDivCenter').css({display : 'flex'});
+                         $('#insideDivCenterClose').css({display : 'flex'});
+
+
+                        //add src img in this case is info beacuse is succesfully
+
+                        $('.insideDivCenterImg').prop('src', './src/images/info.png');
+
+                         //and i insert text with the answer
+
+                        $('.insideDivCenterText').text(resolve);
+                  }
 
 
              }, function(reject){

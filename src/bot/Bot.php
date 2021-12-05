@@ -10,6 +10,13 @@ class Robot{
    static $databaseName = "website";
    static $urlWebsite = "http://localhost"; //the domain
 
+
+
+   static function getPathErrorsLog(){
+
+      return $_SERVER['DOCUMENT_ROOT'] . "/src/bot/errorsUsers/error.log";
+   }
+
    
    static function getMyDomain(){
 
@@ -58,11 +65,22 @@ class Robot{
         $minute = date('i');
         $second = date('s');
 
+        $calendar = null;
+
+        if($year %4 == 0){ //año bisiesto
+
+            $calendar = ['1' => 31, '2' => 29, '3' => 31, '4' => 30, '5' => 31, '6' => 30, '7' => 31, '8' => 31, '9' => 30, '10' => 31, '11' => 30, '12' => 31];
+        
+        }else{
+
+            $calendar = ['1' => 31, '2' => 28, '3' => 31, '4' => 30, '5' => 31, '6' => 30, '7' => 31, '8' => 31, '9' => 30, '10' => 31, '11' => 30, '12' => 31];
+        }
+
         $dateCompleteNoHour = $day . '/' . $month . "/" . $year;
         $dateCompleteHour = $dateCompleteNoHour . "\n $hour:$minute:$second";
 
         $result = ["day" => $day, "month" => $month, "year" => $year, "hour" => $hour, "minute" => $minute, "second" => $second,
-        "dateCompleteNoHour" => $dateCompleteNoHour, "dateCompleteHour" => $dateCompleteHour];
+        "dateCompleteNoHour" => $dateCompleteNoHour, "dateCompleteHour" => $dateCompleteHour, "calendar" => $calendar];
 
         return $result;
     }

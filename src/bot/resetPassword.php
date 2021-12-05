@@ -89,8 +89,315 @@ try{
 
                                  $arrayDateTimeresetPassword = explode(":", $row['dateTime']);
 
-                                 echo $arrayDateTimeresetPassword[1];
+                                 
                             }
+
+
+                            $dayResetPassword = null;
+                            $monthResetPassword = null;
+                            $yearResetPassword = $arrayDateResetPassword[2];
+
+                            $hourResetPassword = null;
+                            $minuteResetPassword = null;
+                            $secondResetPassword = null;
+
+
+                            $currentlyDay = Robot::getTime()['day'];
+                            $currentlyMonth = Robot::getTime()['month'];
+                            $currentlyYear = Robot::getTime()['year'];
+                            $currentlyHour = Robot::getTime()['hour'];
+                            $currentlyMinute = Robot::getTime()['minute'];
+                            $currentlySecond =Robot::getTime()['second'];
+                            
+                            
+
+                            if(preg_match("/^0/", $arrayDateResetPassword[0])){
+
+                                 $dayResetPassword = $arrayDateResetPassword[0][1];
+                                 
+                            }else{
+
+                                $dayResetPassword = $arrayDateResetPassword[0];
+                            }
+
+
+                            if(preg_match("/^0/", $arrayDateResetPassword[1])){
+
+                                 $monthResetPassword = $arrayDateResetPassword[1][1];
+
+                            }else{
+
+                                 $monthResetPassword = $arrayDateResetPassword[1];       
+                            }
+
+
+                            if(preg_match("/^0/", $arrayDateTimeresetPassword[0])){
+
+                                $hourResetPassword = $arrayDateTimeresetPassword[0][1];
+                            
+                            }else{
+
+                                $hourResetPassword = $arrayDateTimeresetPassword[0];
+                            }
+
+
+                            if(preg_match("/^0/", $arrayDateTimeresetPassword[1])){
+
+                                $minuteResetPassword = $arrayDateTimeresetPassword[1][1];
+                            
+                            }else{
+
+                                $minuteResetPassword = $arrayDateTimeresetPassword[1];
+                            }
+
+
+                            if(preg_match("/^0/", $arrayDateTimeresetPassword[2])){
+
+                                $secondResetPassword = $arrayDateTimeresetPassword[2][1];
+
+                            
+                            }else{
+
+                                $secondResetPassword = $arrayDateTimeresetPassword[2];
+                            }
+
+
+
+                            if(preg_match("/^0/", $currentlyDay)){
+
+                                $currentlyDay = $currentlyDay[1];
+                            }
+
+                            if(preg_match("/^0/", $currentlyMonth)){
+
+                                $currentlyMonth = $currentlyMonth[1];
+                            }
+
+                            if(preg_match("/^0/", $currentlyHour)){
+
+                                $currentlyHour = $currentlyHour[1];
+                            }
+
+
+                            if(preg_match("/^0/", $currentlyMinute)){
+
+                                $currentlyMinute = $currentlyMinute[1];
+                            }
+
+                            if(preg_match("/^0/", $currentlySecond)){
+
+                                $currentlySecond = $currentlySecond[1];
+                            }
+
+
+                            $oneDayInSeconds = (24 * 60 * 60);
+    
+                            $oneYearInSeconds = 365 * 24 * 60 * 60;
+
+                            $oneMonthInSeconds = $oneYearInSeconds / 12;
+
+                            $oneHourInSeconds = 1 * 60 * 60;
+
+                            $oneMinInSeconds = 1 * 60;
+                           
+
+
+                            $daysConsumedResetPassword = null;
+                            $daysConsumedCurrentlyDays = null;
+                            
+
+                            for ($i=0; $i < $monthResetPassword ; $i++) { 
+                               
+                                $daysConsumedResetPassword += Robot::getTime()['calendar'][$i];
+                            }
+
+
+                            for ($i=0; $i < $currentlyMonth ; $i++) { 
+                                
+                                $daysConsumedCurrentlyDays += Robot::getTime()['calendar'][$i];
+                            }
+
+
+                            $totalDaysConsumedReset = $daysConsumedResetPassword + $dayResetPassword;
+                            $totalDaysConsumedCurrentlyDays = $daysConsumedCurrentlyDays + $currentlyDay;
+
+
+                            $totalDaysConsumedResetToSeconds = $totalDaysConsumedReset * $oneDayInSeconds;
+                            $totalDaysConsumedCurrentlyDaysToSecond = $totalDaysConsumedCurrentlyDays * $oneDayInSeconds;
+
+
+                            //convert time reset for seconds and after i have to plus to days second consumed year
+
+                            $hourResetPasswordToSeconds = $hourResetPassword * $oneHourInSeconds;
+                            $minutesResetPasswordToSeconds = $minuteResetPassword * $oneMinInSeconds;
+
+                            //convert currently time for seconds and after i have to plus to days second consumed year
+                            $hourCurrentlyPasswordToSeconds = $currentlyHour * $oneHourInSeconds;
+                            $minutesCurrentlyPasswordToSeconds = $currentlyMinute * $oneMinInSeconds;
+
+
+                            $totalAddedConsumedSecondsReset = $totalDaysConsumedResetToSeconds + $hourResetPasswordToSeconds + $minutesResetPasswordToSeconds + $secondResetPassword;
+                            $totalAddedConsumedSecondsCurrently = $totalDaysConsumedCurrentlyDaysToSecond + $hourCurrentlyPasswordToSeconds + $minutesCurrentlyPasswordToSeconds + $currentlySecond;
+
+                            $resultFinalSeconds = null;
+
+                            if($currentlyYear !== $yearResetPassword){
+
+
+                                 $timeComsumedYear = $oneYearInSeconds - $totalAddedConsumedSecondsReset;
+
+                                 if($currentlyYear - $yearResetPassword <= 1){
+
+                                    $resultFinalSeconds = $timeComsumedYear + $totalAddedConsumedSecondsCurrently;
+
+                                 
+                                 }else{
+
+                                   $resultFinalSeconds =  ($timeComsumedYear + $totalAddedConsumedSecondsCurrently) + ($oneYearInSeconds * ($currentlyYear - $yearResetPassword - 1) );
+                                 }
+
+                                 
+
+                            }else{
+
+                                $resultFinalSeconds =  $totalAddedConsumedSecondsCurrently - $totalAddedConsumedSecondsReset;
+                            }
+
+                            
+                            if($resultFinalSeconds < 180){
+
+                                $resultFinalSeconds = 180 - $resultFinalSeconds;
+
+                                if($resultFinalSeconds < 10){
+
+                                    $resultFinalSeconds = "0" . $resultFinalSeconds;
+                                    
+                                }
+
+
+                                if($resultFinalSeconds < 60){
+
+
+                                    throw new Exception("You will again request the password change in" . "\n 00:00:" . $resultFinalSeconds . "\n seconds");
+                                
+                                }else if($resultFinalSeconds == 60){
+
+                                    throw new Exception("You will again request the password change in" . "\n 00:01:00"  . "\n minutes");
+                                
+                                }else if ($resultFinalSeconds > 60 && $resultFinalSeconds < 120){
+                                    
+                                    if($resultFinalSeconds < 60){
+
+                                        $resultFinalSeconds = 60 - $resultFinalSeconds;
+                                    
+                                    }else{
+
+                                        $resultFinalSeconds = $resultFinalSeconds - 60;
+                                    }
+
+
+                                    if($resultFinalSeconds < 10){
+
+                                        $resultFinalSeconds = "0" . $resultFinalSeconds;
+                                    }
+                                    
+
+                                    throw new Exception("You will again request the password change in" . "\n 00:01:" . $resultFinalSeconds . "\n minutes");
+                                
+                                }else if($resultFinalSeconds == 120){
+
+                                    throw new Exception("You will again request the password change in" . "\n 00:02:00"  . "\n minutes");
+                                
+                                }else{
+
+                                    if($resultFinalSeconds < 120){
+
+                                        $resultFinalSeconds = 120 - $resultFinalSeconds;
+                                    
+                                    }else{
+
+                                        $resultFinalSeconds = $resultFinalSeconds - 120;
+                                    }
+
+
+                                    if($resultFinalSeconds < 10){
+
+                                        $resultFinalSeconds = '0' . $resultFinalSeconds;
+                                    }
+
+
+                                    throw new Exception("You will again request the password change in" . "\n 00:02:"  . $resultFinalSeconds ."\n minutes");
+                                }
+                            
+                            
+                            }else{
+
+                                  
+                                   $scandFilesResetPassword = scandir($_SERVER['DOCUMENT_ROOT'] . "/src/users/resetPassword");
+
+                                   if(!$scandFilesResetPassword){
+
+                                      error_log("\r\nNo se han podido escanear los ficheros de la carpeta /src/users/resetPassword para eliminarlo y que pueda volver a cambiar la
+                                      contraseña el usuario con el email" . $_POST['emailReset'] . " en la fecha " .  Robot::getTime()['dateCompleteHour'], 3,
+                                      Robot::getPathErrorsLog());
+
+                                      throw new Exception("An ocurred an error.Try again!");
+                                   
+                                   }else{
+
+
+                                      $resultScanDir = null;
+
+                                       for ($i=0; $i < count($scandFilesResetPassword); $i++) { 
+                                           
+                                            
+                                            if(stripos($scandFilesResetPassword[$i], $_POST['emailReset'])){
+
+                                                $resultScanDir = $scandFilesResetPassword[$i];
+                                            }
+                                       }
+
+
+                                       if(!is_null($resultScanDir)){
+
+                                           if(!unlink($_SERVER['DOCUMENT_ROOT'] . "/src/users/resetPassword/$resultScanDir")){
+                                               
+                                               throw new Exception("An ocurred an error.Try again!");
+                                           }
+                                       }
+
+                                       
+                                       $sql = "DELETE FROM `resetPassword` WHERE `email`='".$_POST['emailReset']."'";
+
+                                       $query = $conn->query($sql);
+
+                                       if(!$query){
+
+                                          throw new Exception("An ocurred an error.Try again");
+
+                                       
+                                       }else{
+
+                                            $sql = "ALTER TABLE `resetPassword` AUTO_INCREMENT = 1";
+
+
+                                            $query = $conn->query($sql);
+
+
+                                            if(!$query){
+
+                                                throw new Exception("An ocurred an error.try again!");
+                                            
+                                            }else{
+
+                                                  echo "succesfully";
+                                            }
+                                       }
+
+                                   }
+                            }
+
+
                        
                        }else{
 
