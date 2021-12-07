@@ -1,5 +1,5 @@
 <div class="divCenter">
-    <div id="insideDivCenterClose"><img id="imgCloseDivCenter" class="closeWindowImg" src="./src/images/closeWindow.jpg" alt="Image close window"></div>
+    <div  id="insideDivCenterClose"><img id="imgCloseDivCenter" class="closeWindowImg" src="./src/images/closeWindow.jpg" alt="Image close window"></div>
     <script type="text/javascript" defer async>
        $('#imgCloseDivCenter').on('click', function(){
            $('.divCenter').css({display : 'none'});

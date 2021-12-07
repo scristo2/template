@@ -443,7 +443,9 @@ try{
                                          }
 
                                          fclose($fop);
-
+                                          
+                                          //create temporaly password
+                                          $shuffleResetPassword = Robot::shuffleResetPassword($_POST['emailReset']);
 
                                         
                                           //send email for reset password
@@ -465,7 +467,7 @@ try{
                                            '<body>' .
                                            '<h1>Hello '. $getUsernameForEmailReset . ':</h1>'.
                                            '<p>We have received the request to change your password, if it was not you, ignore this email.</p>'.
-                                           '<p>To change the password <span><a href="' . 
+                                           '<p>To change the password copy this temporaly password: ' . $shuffleResetPassword . '  and <span><a href="' . 
                                             $pahtResetPasswordForEmailUser .'">click here</a></span></p>' . 
                                             '<hr>'.
                                             '</body>' . 
@@ -485,7 +487,7 @@ try{
                                                 $dateTime = Robot::getTime()['hour'] . ':' . Robot::getTime()['minute'] . ':' . Robot::getTime()['second'];
 
                                                 $sql = "INSERT INTO `resetPassword` (`id`, `email`, `date`, `dateTime`, `temporalPassword`) VALUES (NULL, '".$_POST['emailReset']."',
-                                                '".Robot::getTime()['dateCompleteNoHour']."', '$dateTime', '".Robot::shuffleResetPassword($_POST['emailReset'])."')";
+                                                '".Robot::getTime()['dateCompleteNoHour']."', '$dateTime', '$shuffleResetPassword')";
 
                                                 $query = $conn->query($sql);
 

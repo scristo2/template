@@ -334,7 +334,7 @@
                  $('#insideDivCenterClose').css({display : 'flex'});
 
 
-                 //add src img in this case is info beacuse is succesfully
+                 //add src img in this case is info beacuse is error
 
                  $('.insideDivCenterImg').prop('src', './src/images/errorDivCenter.png');
 
