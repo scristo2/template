@@ -38,6 +38,7 @@ class Robot{
    
 
 
+
    static function getIpClient(){
 
         $ip = null;
@@ -282,6 +283,205 @@ class Robot{
 
     }
 
+
+    static function howTime($dateOcurred, $timeOcurred){
+       
+
+
+
+        $arrayDateResetPassword = explode("/", $dateOcurred);
+
+        $arrayDateTimeresetPassword = explode(":", $timeOcurred);
+
+        $dayResetPassword = null;
+        $monthResetPassword = null;
+        $yearResetPassword = $arrayDateResetPassword[2];
+
+        $hourResetPassword = null;
+        $minuteResetPassword = null;
+        $secondResetPassword = null;
+
+
+        $currentlyDay = self::getTime()['day'];
+        $currentlyMonth = self::getTime()['month'];
+        $currentlyYear = self::getTime()['year'];
+        $currentlyHour = self::getTime()['hour'];
+        $currentlyMinute = self::getTime()['minute'];
+        $currentlySecond = self::getTime()['second'];
+        
+        
+
+        if(preg_match("/^0/", $arrayDateResetPassword[0])){
+
+             $dayResetPassword = $arrayDateResetPassword[0][1];
+             
+        }else{
+
+            $dayResetPassword = $arrayDateResetPassword[0];
+        }
+
+
+        if(preg_match("/^0/", $arrayDateResetPassword[1])){
+
+             $monthResetPassword = $arrayDateResetPassword[1][1];
+
+        }else{
+
+             $monthResetPassword = $arrayDateResetPassword[1];       
+        }
+
+
+        if(preg_match("/^0/", $arrayDateTimeresetPassword[0])){
+
+            $hourResetPassword = $arrayDateTimeresetPassword[0][1];
+        
+        }else{
+
+            $hourResetPassword = $arrayDateTimeresetPassword[0];
+        }
+
+
+        if(preg_match("/^0/", $arrayDateTimeresetPassword[1])){
+
+            $minuteResetPassword = $arrayDateTimeresetPassword[1][1];
+        
+        }else{
+
+            $minuteResetPassword = $arrayDateTimeresetPassword[1];
+        }
+
+
+        if(preg_match("/^0/", $arrayDateTimeresetPassword[2])){
+
+            $secondResetPassword = $arrayDateTimeresetPassword[2][1];
+
+        
+        }else{
+
+            $secondResetPassword = $arrayDateTimeresetPassword[2];
+        }
+
+
+
+        if(preg_match("/^0/", $currentlyDay)){
+
+            $currentlyDay = $currentlyDay[1];
+        }
+
+        if(preg_match("/^0/", $currentlyMonth)){
+
+            $currentlyMonth = $currentlyMonth[1];
+        }
+
+        if(preg_match("/^0/", $currentlyHour)){
+
+            $currentlyHour = $currentlyHour[1];
+        }
+
+
+        if(preg_match("/^0/", $currentlyMinute)){
+
+            $currentlyMinute = $currentlyMinute[1];
+        }
+
+        if(preg_match("/^0/", $currentlySecond)){
+
+            $currentlySecond = $currentlySecond[1];
+        }
+
+
+        $oneDayInSeconds = (24 * 60 * 60);
+
+        $oneYearInSeconds = 365 * 24 * 60 * 60;
+
+        $oneMonthInSeconds = $oneYearInSeconds / 12;
+
+        $oneHourInSeconds = 1 * 60 * 60;
+
+        $oneMinInSeconds = 1 * 60;
+       
+
+
+        $daysConsumedResetPassword = null;
+        $daysConsumedCurrentlyDays = null;
+        
+
+        for ($i=0; $i < $monthResetPassword ; $i++) { 
+            
+            if($i == 0){
+
+                continue;
+            }
+           
+            $daysConsumedResetPassword += self::getTime()['calendar'][$i];
+
+            
+        }
+
+
+        for ($i=0; $i < $currentlyMonth ; $i++) { 
+        
+            if($i == 0){
+
+                continue;
+            }    
+            
+            $daysConsumedCurrentlyDays += self::getTime()['calendar'][$i];
+        }
+
+
+        $totalDaysConsumedReset = $daysConsumedResetPassword + $dayResetPassword;
+        $totalDaysConsumedCurrentlyDays = $daysConsumedCurrentlyDays + $currentlyDay;
+
+
+        $totalDaysConsumedResetToSeconds = $totalDaysConsumedReset * $oneDayInSeconds;
+        $totalDaysConsumedCurrentlyDaysToSecond = $totalDaysConsumedCurrentlyDays * $oneDayInSeconds;
+
+
+        //convert time reset for seconds and after i have to plus to days second consumed year
+
+        $hourResetPasswordToSeconds = $hourResetPassword * $oneHourInSeconds;
+        $minutesResetPasswordToSeconds = $minuteResetPassword * $oneMinInSeconds;
+
+        //convert currently time for seconds and after i have to plus to days second consumed year
+        $hourCurrentlyPasswordToSeconds = $currentlyHour * $oneHourInSeconds;
+        $minutesCurrentlyPasswordToSeconds = $currentlyMinute * $oneMinInSeconds;
+
+
+        $totalAddedConsumedSecondsReset = $totalDaysConsumedResetToSeconds + $hourResetPasswordToSeconds + $minutesResetPasswordToSeconds + $secondResetPassword;
+        $totalAddedConsumedSecondsCurrently = $totalDaysConsumedCurrentlyDaysToSecond + $hourCurrentlyPasswordToSeconds + $minutesCurrentlyPasswordToSeconds + $currentlySecond;
+
+        $resultFinalSeconds = null;
+
+        if($currentlyYear !== $yearResetPassword){
+
+
+             $timeComsumedYear = $oneYearInSeconds - $totalAddedConsumedSecondsReset;
+
+             if($currentlyYear - $yearResetPassword <= 1){
+
+                $resultFinalSeconds = $timeComsumedYear + $totalAddedConsumedSecondsCurrently;
+
+             
+             }else{
+
+               $resultFinalSeconds =  ($timeComsumedYear + $totalAddedConsumedSecondsCurrently) + ($oneYearInSeconds * ($currentlyYear - $yearResetPassword - 1) );
+             }
+
+             
+
+        }else{
+
+            $resultFinalSeconds =  $totalAddedConsumedSecondsCurrently - $totalAddedConsumedSecondsReset;
+        }
+
+
+        return $resultFinalSeconds;
+
+    }//end function how time
+
     
 }
+
+
 

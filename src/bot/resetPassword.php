@@ -206,15 +206,27 @@ try{
                             $daysConsumedCurrentlyDays = null;
                             
 
-                            for ($i=0; $i < $monthResetPassword ; $i++) { 
+                            for ($i=0; $i < $monthResetPassword ; $i++) {
+                                
+                                if($i == 0){
+
+                                    continue;
+                                }
                                
                                 $daysConsumedResetPassword += Robot::getTime()['calendar'][$i];
                             }
 
 
                             for ($i=0; $i < $currentlyMonth ; $i++) { 
+
+                                if($i == 0){
+
+                                    continue;
+                                }
                                 
                                 $daysConsumedCurrentlyDays += Robot::getTime()['calendar'][$i];
+
+                                
                             }
 
 
@@ -467,7 +479,7 @@ try{
                                            '<body>' .
                                            '<h1>Hello '. $getUsernameForEmailReset . ':</h1>'.
                                            '<p>We have received the request to change your password, if it was not you, ignore this email.</p>'.
-                                           '<p>To change the password copy this temporaly password: ' . $shuffleResetPassword . '  and <span><a href="' . 
+                                           '<p>To change the password copy this temporaly password:&nbsp;<span style="font-weight:bold;"> ' . $shuffleResetPassword . '</span>  and <span><a href="' . 
                                             $pahtResetPasswordForEmailUser .'">click here</a></span></p>' . 
                                             '<hr>'.
                                             '</body>' . 

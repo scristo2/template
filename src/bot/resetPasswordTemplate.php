@@ -1,5 +1,8 @@
-<?php 
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . "/src/bot/Bot.php";
+use robot\Robot;
 $path = $_SERVER['REQUEST_URI'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -193,6 +196,21 @@ $path = $_SERVER['REQUEST_URI'];
               margin-bottom: 5vmin;
         }
 
+        .insideDivCenter:last-child{
+
+            margin-top: 2vmin;
+        }
+
+        #logIn{
+            
+            padding: 2vmin;
+            background-color: blue;
+            color: white;
+            font-weight:bolder;
+            cursor: pointer;
+            display: none;
+        }
+
 
 
         @media screen and (min-width: 1000px){
@@ -255,7 +273,44 @@ $path = $_SERVER['REQUEST_URI'];
 
                                 $('.insideDivCenterText').text(resolve);
 
-                            }, function(reject){console.log('weqq')});
+                                //show Button login
+
+                                $('#logIn').css({display : 'flex'});
+
+                                //hide close window
+
+                                $('#insideDivCenterClose').remove();
+
+
+                                $('#logIn').on('click', function(){
+
+                                    document.location.href = "<?php echo Robot::getMyDomain();?>"; 
+                                });
+
+
+                                $()
+
+                            }, function(reject){
+
+                                $('.divCenter').css({
+                                    backgroundImage : 'none'
+                                });
+
+                                $('.App').css({'opacity' : '0.5'});
+
+
+                                $('.insideDivCenter').css({display : 'flex'});
+
+                                $('#insideDivCenterClose').css({display : 'flex'});
+
+                                //add src img in this case is info beacuse is error
+
+                                $('.insideDivCenterImg').prop('src', '/src/images/errorDivcenter.png');
+
+                                //and i insert text with the answer
+
+                                $('.insideDivCenterText').text(reject);
+                            });
                        });
                   
                 }
@@ -309,7 +364,7 @@ $path = $_SERVER['REQUEST_URI'];
                           if(xhr.status !== 200 && xhr.status > 1){
 
                                setTimeout(() => {
-                                   reject('xhr.responseText');
+                                   reject(xhr.responseText);
                                }, 3000);
                           }
                      }
@@ -372,6 +427,9 @@ $path = $_SERVER['REQUEST_URI'];
         <hr class="insideDivCenterHr">
         <p class="insideDivCenterText"></p>
     </div>
+    <div class="insideDivCenter">
+        <input type="button" id="logIn" value="Log In">
+    </div>
 </div>
         <div class="App">
             <div class="App-header">
@@ -384,11 +442,12 @@ $path = $_SERVER['REQUEST_URI'];
                      </div>
                      <form class="App-header-form">
                          <div class="App-header-form-div-input">
-                            <input name="temporalPassword" type="password" class="App-header-form-input"  required autocomplete="no" placeholder="temporal password">
+                            <input name="path" type="hidden" value="<?php echo $_SERVER['DOCUMENT_ROOT'] . $path;?>">
+                            <input name="temporalPassword" type="password" maxlength="15" minlength="5" class="App-header-form-input"  required autocomplete="no" placeholder="temporal password">
                             <img class="App-header-div-form-eye" src="/src/images/showPassword.png" alt="Click here show password">
                          </div>
                          <div class="App-header-form-div-input">
-                              <input name="password1" type="password" class="App-header-form-input" required autocomplete="no" placeholder="New Password">
+                              <input name="password1" type="password" minlength="5" maxlength="15" class="App-header-form-input" required autocomplete="no" placeholder="New Password">
                               <img class="App-header-div-form-eye" src="/src/images/showPassword.png" alt="Click here show password">
                          </div>
                          <div class="App-header-form-div-input">
